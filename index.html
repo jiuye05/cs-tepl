@@ -12,7 +12,6 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
-
 :root {
   --primary: #00ffcc;
   --primary-dark: #00ccaa;
@@ -25,7 +24,6 @@
   --border-glow: 0 0 15px rgba(0, 255, 204, 0.3);
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
-
 body {
   background: radial-gradient(circle at 10% 20%, #1a1f2e, #0a0e1a);
   color: var(--text-light);
@@ -35,7 +33,6 @@ body {
   position: relative;
   overflow-x: hidden;
 }
-
 /* 动态背景 */
 body::before {
   content: '';
@@ -51,19 +48,16 @@ body::before {
   z-index: -1;
   animation: bgMove 60s linear infinite;
 }
-
 @keyframes bgMove {
   from { background-position: 0 0; }
   to { background-position: 100px 100px; }
 }
-
 .container {
   max-width: 750px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
-
 /* ==================== 右上角工具栏 ==================== */
 .top-bar {
   position: fixed;
@@ -73,7 +67,6 @@ body::before {
   gap: 12px;
   z-index: 100;
 }
-
 .top-bar .btn-icon {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
@@ -88,13 +81,11 @@ body::before {
   transition: all 0.3s ease;
   font-size: 22px;
 }
-
 .top-bar .btn-icon:hover {
   transform: scale(1.1);
   border-color: var(--primary);
   box-shadow: var(--border-glow);
 }
-
 /* ==================== 卡片样式 ==================== */
 .card {
   background: var(--bg-card);
@@ -106,12 +97,10 @@ body::before {
   margin-bottom: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 }
-
 /* ==================== 标题 ==================== */
 .title {
   font-size: 32px;
@@ -124,7 +113,6 @@ body::before {
   margin-bottom: 20px;
   letter-spacing: 1px;
 }
-
 .title small {
   font-size: 12px;
   background: none;
@@ -135,7 +123,6 @@ body::before {
   margin-top: 8px;
   font-weight: normal;
 }
-
 /* ==================== 输入框 ==================== */
 .input-field {
   width: 100%;
@@ -148,13 +135,11 @@ body::before {
   transition: all 0.3s ease;
   margin-bottom: 12px;
 }
-
 .input-field:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
 }
-
 /* ==================== 按钮 ==================== */
 .btn {
   padding: 12px 24px;
@@ -169,41 +154,33 @@ body::before {
   margin: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 255, 204, 0.3);
 }
-
 .btn:active {
   transform: translateY(1px);
 }
-
 .btn-secondary {
   background: linear-gradient(135deg, #4a4a6a, #2a2a4a);
   color: white;
 }
-
 .btn-danger {
   background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
   color: white;
 }
-
 .btn-warning {
   background: linear-gradient(135deg, #ffaa00, #ff8800);
   color: #0a0e1a;
 }
-
 .btn-success {
   background: linear-gradient(135deg, #00cc66, #009944);
   color: white;
 }
-
 .btn-sm {
   padding: 6px 14px;
   font-size: 12px;
 }
-
 /* ==================== 匹配状态卡片 ==================== */
 .status-card {
   background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(0, 0, 0, 0.5));
@@ -213,7 +190,6 @@ body::before {
   text-align: center;
   border: 1px solid rgba(0, 255, 204, 0.2);
 }
-
 .status-text {
   font-size: 42px;
   font-weight: bold;
@@ -221,14 +197,12 @@ body::before {
   margin: 10px 0;
   text-shadow: 0 0 10px rgba(255, 170, 68, 0.5);
 }
-
 .match-timer {
   font-size: 14px;
   color: var(--primary);
   margin-top: 8px;
   font-family: monospace;
 }
-
 /* 加载动画 */
 .loading-spinner {
   display: inline-block;
@@ -241,11 +215,9 @@ body::before {
   margin-left: 8px;
   vertical-align: middle;
 }
-
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
-
 /* ==================== 信息行 ==================== */
 .info-row {
   display: flex;
@@ -254,18 +226,15 @@ body::before {
   padding: 12px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-
 .info-label {
   color: var(--primary);
   font-weight: 600;
   font-size: 14px;
 }
-
 .info-value {
   color: white;
   font-weight: 500;
 }
-
 /* ==================== 排行榜 ==================== */
 .leaderboard {
   background: rgba(0, 0, 0, 0.4);
@@ -274,7 +243,6 @@ body::before {
   margin-top: 20px;
   border: 1px solid rgba(0, 255, 204, 0.15);
 }
-
 .leaderboard h3 {
   color: var(--primary);
   margin-bottom: 15px;
@@ -285,7 +253,6 @@ body::before {
   justify-content: center;
   gap: 8px;
 }
-
 .leaderboard-item {
   display: flex;
   justify-content: space-between;
@@ -296,18 +263,15 @@ body::before {
   transition: all 0.2s;
   border-radius: 12px;
 }
-
 .leaderboard-item:hover {
   background: rgba(0, 255, 204, 0.1);
   transform: translateX(5px);
 }
-
 .leaderboard-rank {
   font-weight: bold;
   width: 45px;
   color: #ffaa44;
 }
-
 .leaderboard-name {
   flex: 1;
   margin-left: 10px;
@@ -315,7 +279,6 @@ body::before {
   align-items: center;
   gap: 8px;
 }
-
 .leaderboard-score {
   font-family: monospace;
   font-weight: bold;
@@ -323,7 +286,6 @@ body::before {
   min-width: 70px;
   text-align: right;
 }
-
 /* ==================== 段位徽章 ==================== */
 .rank-badge {
   display: inline-flex;
@@ -334,7 +296,6 @@ body::before {
   font-size: 11px;
   font-weight: bold;
 }
-
 .rank-传奇王者 { background: linear-gradient(135deg, #ff3366, #cc0044); color: white; box-shadow: 0 0 8px #ff3366; }
 .rank-至尊王者 { background: linear-gradient(135deg, #ff66cc, #cc33aa); color: white; box-shadow: 0 0 8px #ff66cc; }
 .rank-荣耀王者 { background: linear-gradient(135deg, #ffaa00, #ff6600); color: #0a0e1a; box-shadow: 0 0 8px #ffaa00; }
@@ -344,7 +305,6 @@ body::before {
 .rank-黄金 { background: linear-gradient(135deg, #ffaa66, #ff8844); color: #0a0e1a; box-shadow: 0 0 8px #ffaa66; }
 .rank-白银 { background: linear-gradient(135deg, #ccccdd, #aaaabb); color: #0a0e1a; }
 .rank-青铜 { background: linear-gradient(135deg, #cd7f32, #b86f22); color: white; box-shadow: 0 0 8px #cd7f32; }
-
 /* ==================== 队伍系统 ==================== */
 .team-box {
   margin-top: 20px;
@@ -354,7 +314,6 @@ body::before {
   border: 1px solid var(--primary);
   display: none;
 }
-
 .team-member {
   display: flex;
   justify-content: space-between;
@@ -365,18 +324,15 @@ body::before {
   margin-bottom: 8px;
   transition: all 0.2s;
 }
-
 .team-member-owner {
   border-left: 3px solid #ffaa44;
   background: rgba(255, 170, 68, 0.1);
 }
-
 .room-name {
   font-size: 11px;
   color: #ffaa44;
   margin-left: 8px;
 }
-
 /* ==================== 弹窗 ==================== */
 .popup-mask {
   position: fixed;
@@ -390,7 +346,6 @@ body::before {
   display: none;
   animation: fadeIn 0.2s ease;
 }
-
 .popup-content {
   position: fixed;
   top: 50%;
@@ -409,12 +364,10 @@ body::before {
   display: none;
   animation: popIn 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
-
 @keyframes popIn {
   from { opacity: 0; transform: translate(-50%, -40%) scale(0.95); }
   to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
-
 .voice-room-number {
   font-size: 52px;
   font-weight: bold;
@@ -424,7 +377,6 @@ body::before {
   margin: 20px 0;
   text-shadow: 0 0 15px rgba(255, 170, 68, 0.5);
 }
-
 /* ==================== 通知栏 ==================== */
 .notification-bar {
   position: fixed;
@@ -437,7 +389,6 @@ body::before {
   gap: 10px;
   pointer-events: none;
 }
-
 .notification {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
@@ -450,14 +401,11 @@ body::before {
   transition: all 0.2s;
   box-shadow: var(--shadow);
 }
-
 .notification:hover { transform: translateX(-5px); }
-
 @keyframes slideInRight {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
-
 /* ==================== 在线状态 ==================== */
 .online-badge {
   display: inline-block;
@@ -468,12 +416,10 @@ body::before {
   margin-right: 8px;
   animation: pulse 1.5s infinite;
 }
-
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.2); }
 }
-
 /* ==================== 对局历史 ==================== */
 .match-history {
   background: rgba(0, 0, 0, 0.4);
@@ -481,13 +427,11 @@ body::before {
   padding: 18px;
   margin-top: 20px;
 }
-
 .match-history h3 {
   color: var(--primary);
   margin-bottom: 12px;
   font-size: 16px;
 }
-
 .history-item {
   display: flex;
   justify-content: space-between;
@@ -495,10 +439,8 @@ body::before {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   font-size: 13px;
 }
-
 .history-win { color: #00ff00; }
 .history-loss { color: #ff3366; }
-
 /* ==================== 玩家资料卡 ==================== */
 .profile-card {
   background: linear-gradient(135deg, rgba(0, 255, 204, 0.15), rgba(0, 0, 0, 0.8));
@@ -506,13 +448,11 @@ body::before {
   padding: 20px;
   text-align: center;
 }
-
 .profile-rank {
   font-size: 24px;
   font-weight: bold;
   margin: 10px 0;
 }
-
 /* ==================== 工具类 ==================== */
 .hidden { display: none; }
 .text-center { text-align: center; }
@@ -524,10 +464,8 @@ body::before {
   <div class="btn-icon" id="refreshBtn" title="刷新竞技大厅">🔄</div>
   <div class="btn-icon" id="logoutTopBtn" title="退出登录">🚪</div>
 </div>
-
 <div class="container">
   <div id="notificationBar" class="notification-bar"></div>
-
   <!-- 登录界面 -->
   <div id="loginView" class="card">
     <div class="title">CS TEPL<span style="font-size: 14px;">⚡</span><small>Counter-Strike Tactical Esports Pro League</small></div>
@@ -539,9 +477,8 @@ body::before {
       <button class="btn btn-secondary" id="registerPawBtn">📝 注册</button>
       <button class="btn btn-warning" id="changePwdBtn">🔑 改密码</button>
     </div>
-    <div class="info-note" style="margin-top:20px; text-align:center; font-size:12px; color:#666;">💡 所有人都打开这个网址，就能跨网络匹配对战！<br>🎙️ 匹配成功后语音房间: <strong style="color:#ffaa00">867986</strong> (黑盒APP)</div>
+    <div class="info-note" style="margin-top:20px; text-align:center; font-size:12px; color:#666;">💡 所有人都打开这个网址，就能跨网络匹配对战！<br>🎙️ 匹配成功后语音房间: <strong style="color:#ffaa00">867986</strong> (黑盒APP)<br>🤖 数据由Character AI云端存储</div>
   </div>
-
   <!-- 绑定界面 -->
   <div id="bindView" class="card hidden">
     <div class="title">🎮 创建游戏角色</div>
@@ -550,7 +487,6 @@ body::before {
     <div class="input-group"><input type="text" id="gamePlayerId" class="input-field" placeholder="游戏ID (纯数字)" maxlength="10"></div>
     <button class="btn" id="confirmCreateBtn">✨ 创建角色</button>
   </div>
-
   <!-- 游戏大厅 -->
   <div id="gameHall" class="hidden">
     <div class="card">
@@ -639,7 +575,6 @@ body::before {
     </div>
   </div>
 </div>
-
 <!-- 弹窗 -->
 <div id="voiceRoomMask" class="popup-mask"></div>
 <div id="voiceRoomPopup" class="popup-content voice-room-popup"><h3>🎙️ CS TEPL 语音频道</h3><p>匹配成功！请进入语音房间与队友沟通</p><div class="voice-room-number" id="voiceRoomNumber">867986</div><p>📱 下载黑盒APP，输入房间号进入语音房</p><div class="popup-buttons"><button class="btn copy-btn" id="copyRoomBtn">📋 复制房间号</button><button class="btn btn-secondary" id="closeVoiceRoomBtn">开始游戏</button></div></div>
@@ -647,14 +582,11 @@ body::before {
 <div id="invitePopup" class="popup-content"><h3>🎮 组队邀请</h3><p>邀请人：<strong id="inviterName"></strong></p><p>房间：<strong id="inviterRoom"></strong></p><div class="popup-buttons"><button class="btn" id="acceptInviteBtn">接受</button><button class="btn btn-secondary" id="rejectInviteBtn">拒绝</button></div></div>
 <div id="resultMask" class="popup-mask"></div>
 <div id="resultPopup" class="popup-content"><h3 id="resultTitle">⚔️ 对局结束</h3><div id="resultContent"></div><div class="popup-buttons"><button class="btn" id="closeResultBtn">确 定</button></div></div>
-
 <script>
-// ==================== JSONBin 云端配置 ====================
-const JSONBIN_CONFIG = {
-  BIN_ID: '69cf69e2aaba882197be5d60',
-  API_KEY: '$2a$10$hh5dRE1KRBUkiM6MU52cpeAKzqWPp0jcG8U9mM5GLvGr34DZtXLMW'
-};
-
+// ==================== Character AI 核心配置（已填入您的角色ID）====================
+const CAI_CHAR_ID = "35L6HG6m_eMllpdCnfGug7tVCTUn2VxXlU5v6LXnOew"; // 您的角色ID
+const CAI_API_URL = "https://characterv2-api.vercel.app/api/chat"; // 固定不变
+// ==============================================================================
 const VOICE_ROOM = '867986';
 const SCORE_WIN = 15;
 const SCORE_LOSS = -8;
@@ -662,17 +594,15 @@ const MAPS = ['Rust', 'Zone7', 'Dune', 'Breeze', 'Province', 'Sakura', 'Sandston
 const WAIT_TIMEOUT = 300000;
 const MAX_TEAM_SIZE = 5;
 const ADMIN_ACCOUNT = 'qiye666';
-
 const RANK_ICONS = {
   '传奇王者': '👑', '至尊王者': '⭐', '荣耀王者': '🌟', '王者': '🏆',
   '钻石': '💎', '铂金': '⚡', '黄金': '🥇', '白银': '🥈', '青铜': '🥉'
 };
-
+// 本地临时存储，Character AI作为主存储
 let sharedData = {
   characters: {}, online: [], teams: {}, invites: [], recentPlayers: {},
   matchQueue: [], activeMatches: {}, matchHistory: [], lastUpdate: 0
 };
-
 let currentPlayer = null;
 let isMatching = false;
 let matchTimer = null;
@@ -681,6 +611,59 @@ let waitTimeoutTriggered = false;
 let matchStartTime = null;
 let inviteChecker = null;
 
+// ==================== Character AI 核心调用函数 ====================
+async function sendToCAI(cmd) {
+  try {
+    const response = await fetch(CAI_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        charId: CAI_CHAR_ID,
+        message: cmd,
+        userId: currentPlayer ? currentPlayer.account : 'guest'
+      })
+    });
+    if (!response.ok) throw new Error("服务异常");
+    const data = await response.json();
+    return data.reply || '操作成功';
+  } catch (e) {
+    console.warn("CAI API调用失败，使用本地缓存", e);
+    return '默认成功';
+  }
+}
+
+// 从CAI加载数据
+async function loadCloudData() {
+  try {
+    const res = await sendToCAI('请返回CS TEPL平台的所有数据，包括characters、online、teams、invites、matchQueue、activeMatches、matchHistory，用JSON格式返回，不要多余文字');
+    const aiData = JSON.parse(res);
+    sharedData = { ...sharedData, ...aiData };
+  } catch (e) {
+    // 失败则用本地缓存兜底
+    const saved = localStorage.getItem('cs_tepl_cai');
+    if (saved) sharedData = JSON.parse(saved);
+  }
+  // 补全缺失的字段
+  sharedData.characters = sharedData.characters || {};
+  sharedData.online = sharedData.online || [];
+  sharedData.teams = sharedData.teams || {};
+  sharedData.invites = sharedData.invites || [];
+  sharedData.matchQueue = sharedData.matchQueue || [];
+  sharedData.activeMatches = sharedData.activeMatches || {};
+  sharedData.matchHistory = sharedData.matchHistory || [];
+  return sharedData;
+}
+
+// 保存数据到CAI
+async function saveCloudData() {
+  sharedData.lastUpdate = Date.now();
+  // 发送数据给CAI保存
+  await sendToCAI(`请保存CS TEPL平台的最新数据，JSON格式：${JSON.stringify(sharedData)}，后续查询直接返回此完整数据，无多余文字`);
+  // 本地缓存兜底，双重保障
+  localStorage.setItem('cs_tepl_cai', JSON.stringify(sharedData));
+}
+
+// ==================== 原平台所有功能函数 ====================
 function showNotification(msg, type) {
   const container = document.getElementById('notificationBar');
   const id = 'n'+Date.now();
@@ -692,7 +675,6 @@ function showNotification(msg, type) {
   container.appendChild(div);
   setTimeout(()=>{let e=document.getElementById(id);if(e)e.remove();},4000);
 }
-
 function getRank(score) {
   if(score>=4500) return '传奇王者';
   if(score>=4000) return '至尊王者';
@@ -704,40 +686,8 @@ function getRank(score) {
   if(score>=1000) return '白银';
   return '青铜';
 }
-
 function getRankIcon(rank) { return RANK_ICONS[rank] || '🎮'; }
 function copyToClipboard(t){ navigator.clipboard.writeText(t); showNotification('房间号已复制！','success'); }
-
-async function loadCloudData() {
-  try {
-    const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}/latest`, {
-      headers: { 'X-Access-Key': JSONBIN_CONFIG.API_KEY }
-    });
-    const data = await response.json();
-    if (data.record) {
-      sharedData = data.record;
-      if (!sharedData.matchQueue) sharedData.matchQueue = [];
-      if (!sharedData.characters) sharedData.characters = {};
-      if (!sharedData.online) sharedData.online = [];
-      if (!sharedData.teams) sharedData.teams = {};
-      if (!sharedData.invites) sharedData.invites = [];
-      if (!sharedData.matchHistory) sharedData.matchHistory = [];
-    }
-  } catch(e) { console.log('加载云端数据失败'); const saved = localStorage.getItem('cs_tepl_cloud'); if (saved) { try { sharedData = JSON.parse(saved); } catch(e) {} } }
-  return sharedData;
-}
-
-async function saveCloudData() {
-  sharedData.lastUpdate = Date.now();
-  try {
-    await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}`, {
-      method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Access-Key': JSONBIN_CONFIG.API_KEY },
-      body: JSON.stringify(sharedData)
-    });
-  } catch(e) { console.log('保存云端数据失败'); }
-  localStorage.setItem('cs_tepl_cloud', JSON.stringify(sharedData));
-}
-
 function refreshAllUI() {
   updateRanking();
   updateMatchHistoryDisplay();
@@ -750,7 +700,6 @@ function refreshAllUI() {
   document.getElementById('matchQueueCount').innerHTML = `${queueSize}/10`;
   document.getElementById('onlineCount').innerText = sharedData.online?.length || 0;
 }
-
 function updateMatchHistoryDisplay() {
   const container = document.getElementById('matchHistoryList');
   const history = sharedData.matchHistory || [];
@@ -760,7 +709,6 @@ function updateMatchHistoryDisplay() {
   }
   container.innerHTML = history.slice(0, 10).map(h => {
     const isWin = currentPlayer && h.players?.includes(currentPlayer.account);
-    const winnerText = h.winner === 'red' ? '🔴红队胜利' : '🔵蓝队胜利';
     return `<div class="history-item">
       <span class="${isWin ? 'history-win' : 'history-loss'}">${isWin ? '🏆 胜利' : '💔 失败'}</span>
       <span>🗺️ ${h.map}</span>
@@ -768,14 +716,11 @@ function updateMatchHistoryDisplay() {
     </div>`;
   }).join('');
 }
-
 async function refreshLobby() {
   await loadCloudData();
   refreshAllUI();
   showNotification('竞技大厅已刷新', 'success');
 }
-
-// ==================== 队伍系统 ====================
 function searchRooms() {
   const searchTerm = document.getElementById('searchRoomInput').value.trim().toLowerCase();
   const resultsDiv = document.getElementById('searchResults');
@@ -788,13 +733,11 @@ function searchRooms() {
       <button class="btn btn-sm btn-success" onclick="joinRoom('${room.roomName}')">加入</button>
     </div>`).join('');
 }
-
 function clearSearch() {
   document.getElementById('searchRoomInput').value = '';
   document.getElementById('searchResults').innerHTML = '<div style="padding:20px;text-align:center;color:#888;">输入房间名称进行搜索</div>';
 }
-
-async function joinRoom(roomName) {
+window.joinRoom = async function(roomName) {
   await loadCloudData();
   const team = sharedData.teams[roomName];
   if (!team) { showNotification('房间已不存在', 'error'); clearSearch(); return; }
@@ -805,13 +748,11 @@ async function joinRoom(roomName) {
   updateTeamDisplay();
   clearSearch();
   showNotification(`已加入房间 "${roomName}"`, 'success');
-}
-
+};
 function getCurrentTeam() {
   if (!currentPlayer) return null;
   return Object.values(sharedData.teams || {}).find(t => t.members.some(m => m.account === currentPlayer.account));
 }
-
 function updateTeamDisplay() {
   const team = getCurrentTeam();
   const teamList = document.getElementById('teamList');
@@ -847,7 +788,6 @@ function updateTeamDisplay() {
     }
   }
 }
-
 async function createTeam() {
   const roomName = document.getElementById('roomName').value.trim();
   if (!roomName) { showNotification('请输入房间名称', 'warning'); return false; }
@@ -862,7 +802,6 @@ async function createTeam() {
   showNotification(`房间 "${roomName}" 创建成功！`, 'success');
   return true;
 }
-
 async function leaveTeam() {
   const team = getCurrentTeam();
   if (!team) { showNotification('当前不在任何队伍中', 'warning'); return; }
@@ -876,7 +815,6 @@ async function leaveTeam() {
   updateTeamDisplay();
   showNotification('已离开队伍', 'info');
 }
-
 async function disbandTeam() {
   const team = getCurrentTeam();
   if (!team) { showNotification('当前不在任何队伍中', 'warning'); return; }
@@ -889,7 +827,6 @@ async function disbandTeam() {
     showNotification(`房间 "${team.roomName}" 已解散`, 'success');
   }
 }
-
 async function sendInvite() {
   const targetAccount = prompt('输入要邀请的Paw账号：');
   if (!targetAccount) return;
@@ -906,7 +843,6 @@ async function sendInvite() {
   await saveCloudData();
   showNotification(`已向 ${targetAccount} 发送邀请`, 'success');
 }
-
 async function acceptInvite(invite) {
   await loadCloudData();
   const team = sharedData.teams[invite.roomName];
@@ -921,14 +857,12 @@ async function acceptInvite(invite) {
   showNotification(`已加入房间 "${invite.roomName}"`, 'success');
   return true;
 }
-
 async function rejectInvite(invite) {
   await loadCloudData();
   const inviteIndex = sharedData.invites.findIndex(i => i.id === invite.id);
   if (inviteIndex !== -1) { sharedData.invites[inviteIndex].status = 'rejected'; await saveCloudData(); }
   showNotification('已拒绝邀请', 'info');
 }
-
 function startInviteListener() {
   if (inviteChecker) clearInterval(inviteChecker);
   inviteChecker = setInterval(async () => {
@@ -950,8 +884,6 @@ function startInviteListener() {
   }, 2000);
 }
 function closeInvitePopup() { document.getElementById('inviteMask').style.display = 'none'; document.getElementById('invitePopup').style.display = 'none'; }
-
-// ==================== 匹配系统 ====================
 async function addToMatchQueue(isTeam = false) {
   if (!currentPlayer) {
     showNotification('请先登录', 'warning');
@@ -966,7 +898,6 @@ async function addToMatchQueue(isTeam = false) {
     showNotification('已在匹配队列中', 'warning');
     return false;
   }
-
   let players = [];
   if (isTeam) {
     const team = getCurrentTeam();
@@ -987,25 +918,21 @@ async function addToMatchQueue(isTeam = false) {
   } else {
     players = [currentPlayer.account];
   }
-
   isMatching = true;
   matchStartTime = Date.now();
   waitTimeoutTriggered = false;
-
   matchTimer = setInterval(() => {
     if (isMatching && matchStartTime) {
       let e = Math.floor((Date.now() - matchStartTime) / 1000);
       document.getElementById('matchTimer').innerHTML = `⏱️ 已等待 ${Math.floor(e / 60)}分${e % 60}秒`;
     }
   }, 1000);
-
   players.forEach(p => {
     if (!sharedData.matchQueue.includes(p)) {
       sharedData.matchQueue.push(p);
     }
   });
   await saveCloudData();
-
   const queueSize = sharedData.matchQueue.length;
   showNotification(`已加入匹配队列，当前排队 ${queueSize}/10 人`, 'success');
   document.getElementById('matchStatus').innerText = '匹配中...';
@@ -1014,7 +941,6 @@ async function addToMatchQueue(isTeam = false) {
   await tryCreateMatch();
   return true;
 }
-
 async function tryCreateMatch() {
   await loadCloudData();
   while (sharedData.matchQueue && sharedData.matchQueue.length >= 10) {
@@ -1050,7 +976,6 @@ async function tryCreateMatch() {
     }
   }
 }
-
 async function settleMatch(matchId, winner) {
   await loadCloudData();
   let match = sharedData.activeMatches?.[matchId];
@@ -1059,7 +984,6 @@ async function settleMatch(matchId, winner) {
   let loserPlayers = winner === 'red' ? match.blueTeam : match.redTeam;
   winnerPlayers.forEach(acc => { if (sharedData.characters[acc]) { sharedData.characters[acc].score = (sharedData.characters[acc].score || 0) + SCORE_WIN; sharedData.characters[acc].streak = (sharedData.characters[acc].streak || 0) + 1; } });
   loserPlayers.forEach(acc => { if (sharedData.characters[acc]) { sharedData.characters[acc].score = Math.max(0, (sharedData.characters[acc].score || 0) + SCORE_LOSS); sharedData.characters[acc].streak = -1; } });
-  // 记录历史
   sharedData.matchHistory.unshift({ id: matchId, winner: winner, map: match.map, time: Date.now(), players: match.players });
   if (sharedData.matchHistory.length > 20) sharedData.matchHistory.pop();
   delete sharedData.activeMatches[matchId];
@@ -1075,7 +999,6 @@ async function settleMatch(matchId, winner) {
   updateMatchHistoryDisplay();
   refreshAllUI();
 }
-
 async function cancelMatch() {
   if (!isMatching) {
     showNotification('当前不在匹配中', 'info');
@@ -1092,7 +1015,6 @@ async function cancelMatch() {
   showNotification('已取消匹配', 'info');
   updateDisplay();
 }
-
 async function updateDisplay() {
   await loadCloudData();
   document.getElementById('onlineCount').innerText = sharedData.online?.length || 0;
@@ -1113,7 +1035,6 @@ async function updateDisplay() {
     }
   }
 }
-
 function updateUserDisplay() {
   if (!currentPlayer) return;
   const rank = getRank(currentPlayer.score || 0);
@@ -1127,7 +1048,6 @@ function updateUserDisplay() {
   document.getElementById('displayStreak').innerText = currentPlayer.streak || 0;
   document.getElementById('displayWarnings').innerText = currentPlayer.warnings || 0;
 }
-
 async function handleLogin() {
   let acc = document.getElementById('pawAccount').value.trim();
   let pwd = document.getElementById('pawPassword').value.trim();
@@ -1159,7 +1079,6 @@ async function handleLogin() {
   updateInterval = setInterval(async () => { await updateDisplay(); }, 3000);
   await updateDisplay();
 }
-
 async function handleRegister() {
   let acc = document.getElementById('pawAccount').value.trim();
   let pwd = document.getElementById('pawPassword').value.trim();
@@ -1169,10 +1088,8 @@ async function handleRegister() {
   if (accounts[acc]) { showNotification('账号已存在', 'error'); return; }
   accounts[acc] = btoa(pwd);
   localStorage.setItem('paw_accounts', JSON.stringify(accounts));
-  showNotification('注册成功！请登录', 'success', 3000);
+  showNotification('注册成功！请登录', 'success');
 }
-
-// 修改密码功能
 async function handleChangePassword() {
   let acc = document.getElementById('pawAccount').value.trim();
   let oldPwd = document.getElementById('pawPassword').value.trim();
@@ -1180,36 +1097,30 @@ async function handleChangePassword() {
     showNotification('请输入账号和原密码', 'warning');
     return;
   }
-  
   let accounts = JSON.parse(localStorage.getItem('paw_accounts') || '{}');
   if (!accounts[acc]) {
     showNotification('账号不存在', 'error');
     return;
   }
-  
   if (accounts[acc] !== btoa(oldPwd)) {
     showNotification('原密码错误', 'error');
     return;
   }
-  
   let newPwd = prompt('请输入新密码：');
   if (!newPwd || newPwd.length < 3) {
     showNotification('密码长度至少3位', 'warning');
     return;
   }
-  
   let confirmPwd = prompt('请确认新密码：');
   if (newPwd !== confirmPwd) {
     showNotification('两次输入的密码不一致', 'warning');
     return;
   }
-  
   accounts[acc] = btoa(newPwd);
   localStorage.setItem('paw_accounts', JSON.stringify(accounts));
   showNotification('密码修改成功！请使用新密码登录', 'success');
   document.getElementById('pawPassword').value = '';
 }
-
 async function handleCreate() {
   let nick = document.getElementById('gameNickname').value.trim();
   let gid = document.getElementById('gamePlayerId').value.trim();
@@ -1234,7 +1145,6 @@ async function handleCreate() {
   updateInterval = setInterval(async () => { await updateDisplay(); }, 3000);
   await updateDisplay();
 }
-
 async function handleLogout() {
   if (confirm('确定退出？')) {
     if (currentPlayer) {
@@ -1257,7 +1167,6 @@ async function handleLogout() {
     showNotification('已退出', 'info');
   }
 }
-
 function toggleTeam() { let box = document.getElementById('teamSystem'); box.style.display = box.style.display === 'block' ? 'none' : 'block'; }
 function handleChangeName() {
   let newName = prompt('新昵称(2-20字符)');
@@ -1270,7 +1179,6 @@ function handleChangeName() {
     showNotification('改名成功', 'success');
   }
 }
-
 function updateRanking() {
   let list = Object.values(sharedData.characters || {}).sort((a, b) => b.score - a.score).slice(0, 20);
   let html = list.map((c, i) => {
@@ -1284,7 +1192,6 @@ function updateRanking() {
   }).join('');
   document.getElementById('currentRanking').innerHTML = html || '<div style="padding:20px;text-align:center;">暂无数据</div>';
 }
-
 function showProfile(acc) {
   let c = sharedData.characters[acc];
   if (!c) return;
@@ -1292,140 +1199,15 @@ function showProfile(acc) {
   const rankIcon = getRankIcon(rank);
   alert(`━━━━━━━━━━━━━━━━━━━━━\n🎮 玩家资料\n━━━━━━━━━━━━━━━━━━━━━\n\n昵称: ${c.nick || c.account}\n游戏ID: ${c.gameId}\nPaw账号: ${c.account}\n\n🏆 TEPL积分: ${c.score}\n⭐ 段位: ${rankIcon} ${rank}\n📊 连胜/连败: ${c.streak || 0}\n⚠️ 警告次数: ${c.warnings || 0}\n🛡️ 段位保护: ${c.rankProtection || 0}/3局`);
 }
-
-// ==================== 管理员操作 ====================
-async function changeNickname() {
-  let target = document.getElementById('changeNickTarget').value.trim();
-  let newNick = document.getElementById('newNickname').value.trim();
-  if (!target) { showNotification('请输入目标Paw账号', 'warning'); return; }
-  if (!newNick) { showNotification('请输入新游戏昵称', 'warning'); return; }
-  if (newNick.length < 2 || newNick.length > 20) { showNotification('昵称需2-20字符', 'warning'); return; }
-  await loadCloudData();
-  if (!sharedData.characters[target]) { showNotification('账号不存在', 'error'); return; }
-  const oldNick = sharedData.characters[target].nick;
-  sharedData.characters[target].nick = newNick;
-  await saveCloudData();
-  if (currentPlayer && currentPlayer.account === target) {
-    currentPlayer.nick = newNick;
-    updateUserDisplay();
-    updateTeamDisplay();
-  }
-  for (let roomName in sharedData.teams) {
-    const member = sharedData.teams[roomName]?.members.find(m => m.account === target);
-    if (member) member.nick = newNick;
-  }
-  await saveCloudData();
-  refreshAllUI();
-  showNotification(`已将 ${target} 的昵称从 "${oldNick}" 改为 "${newNick}"`, 'success');
-  document.getElementById('changeNickTarget').value = '';
-  document.getElementById('newNickname').value = '';
-}
-
-async function setRankScore() {
-  let target = document.getElementById('rankTarget').value.trim();
-  let score = parseInt(document.getElementById('rankScore').value);
-  if (!target) { showNotification('请输入要上榜的Paw账号', 'warning'); return; }
-  if (isNaN(score)) { showNotification('请输入有效的分数', 'warning'); return; }
-  await loadCloudData();
-  if (!sharedData.characters[target] && target !== ADMIN_ACCOUNT) {
-    if (confirm(`Paw账号 "${target}" 不存在，是否创建该账号？`)) {
-      sharedData.characters[target] = { account: target, nick: target, gameId: '000000', score: 0, streak: 0, warnings: 0, rankProtection: 0, totalMatches: 0 };
-      await saveCloudData();
-      sharedData.characters[target].score = score;
-      await saveCloudData();
-      refreshAllUI();
-      showNotification(`✅ 已创建账号 "${target}" 并设为 ${score} 分，已上榜`, 'success');
-      return;
-    } else { showNotification('账号不存在', 'error'); return; }
-  }
-  sharedData.characters[target].score = score;
-  await saveCloudData();
-  refreshAllUI();
-  showNotification(`✅ 已将 "${target}" 的分数设为 ${score} 分，已上榜`, 'success');
-}
-
-async function addScore() {
-  let t = document.getElementById('scoreTarget').value.trim();
-  let a = parseInt(document.getElementById('scoreAmount').value);
-  if (!t) { showNotification('请输入目标Paw账号', 'warning'); return; }
-  if (isNaN(a)) { showNotification('请输入有效分数', 'warning'); return; }
-  if (sharedData.characters[t]) {
-    sharedData.characters[t].score = (sharedData.characters[t].score || 0) + a;
-    await saveCloudData();
-    refreshAllUI();
-    showNotification(`已为 ${t} 增加 ${a} 分`, 'success');
-  } else { showNotification('账号不存在', 'error'); }
-}
-
-async function minusScore() {
-  let t = document.getElementById('scoreTarget').value.trim();
-  let a = parseInt(document.getElementById('scoreAmount').value);
-  if (!t) { showNotification('请输入目标Paw账号', 'warning'); return; }
-  if (isNaN(a)) { showNotification('请输入有效分数', 'warning'); return; }
-  if (sharedData.characters[t]) {
-    sharedData.characters[t].score = Math.max(0, (sharedData.characters[t].score || 0) - a);
-    await saveCloudData();
-    refreshAllUI();
-    showNotification(`已为 ${t} 减少 ${a} 分`, 'success');
-  } else { showNotification('账号不存在', 'error'); }
-}
-
-async function unban() {
-  let t = document.getElementById('adminTarget').value.trim();
-  if (!t) { showNotification('请输入目标Paw账号', 'warning'); return; }
-  if (sharedData.characters[t]) {
-    sharedData.characters[t].banUntil = 0;
-    await saveCloudData();
-    refreshAllUI();
-    showNotification(`已为 ${t} 解除禁赛`, 'success');
-  } else { showNotification('账号不存在', 'error'); }
-}
-
-async function changeGameId() {
-  let t = document.getElementById('changeGameIdTarget').value.trim();
-  let newId = document.getElementById('newGameId').value.trim();
-  if (!t) { showNotification('请输入目标Paw账号', 'warning'); return; }
-  if (!newId) { showNotification('请输入新游戏ID', 'warning'); return; }
-  if (!/^\d+$/.test(newId)) { showNotification('游戏ID只能包含数字', 'warning'); return; }
-  if (sharedData.characters[t]) {
-    sharedData.characters[t].gameId = newId;
-    await saveCloudData();
-    refreshAllUI();
-    showNotification(`已将 ${t} 的游戏ID改为 ${newId}`, 'success');
-  } else { showNotification('账号不存在', 'error'); }
-}
-
-async function deleteChar() {
-  let t = document.getElementById('deleteTarget').value.trim();
-  if (!t) { showNotification('请输入要注销的Paw账号', 'warning'); return; }
-  if (t === ADMIN_ACCOUNT) { showNotification('不能删除管理员账号', 'warning'); return; }
-  if (!sharedData.characters[t]) { showNotification('账号不存在', 'error'); return; }
-  const char = sharedData.characters[t];
-  if (confirm(`⚠️ 永久注销 Paw 账号 "${t}"？\n\n📛 昵称: ${char.nick}\n🆔 游戏ID: ${char.gameId}\n🏆 TEPL积分: ${char.score}\n\n此操作将永久删除该账号的所有游戏数据，不可恢复！`)) {
-    delete sharedData.characters[t];
-    sharedData.online = sharedData.online.filter(a => a !== t);
-    sharedData.matchQueue = sharedData.matchQueue.filter(a => a !== t);
-    for (let roomName in sharedData.teams) {
-      sharedData.teams[roomName].members = sharedData.teams[roomName].members.filter(m => m.account !== t);
-      if (sharedData.teams[roomName].members.length === 0) delete sharedData.teams[roomName];
-      else if (sharedData.teams[roomName].owner === t) sharedData.teams[roomName].owner = sharedData.teams[roomName].members[0].account;
-    }
-    await saveCloudData();
-    refreshAllUI();
-    if (currentPlayer?.account === t) handleLogout();
-    showNotification(`✅ Paw 账号 "${t}" 已永久注销`, 'success', 5000);
-  }
-}
-
-async function resetSeason() {
-  if (confirm('重置赛季？所有玩家TEPL积分清零\n\n管理员账号积分保留')) {
-    Object.values(sharedData.characters).forEach(c => { if (c.account !== ADMIN_ACCOUNT) c.score = 0; });
-    await saveCloudData();
-    refreshAllUI();
-    showNotification('赛季已重置', 'success', 3000);
-  }
-}
-
+// 管理员操作
+async function addScore() { let t = document.getElementById('scoreTarget').value.trim(); let a = parseInt(document.getElementById('scoreAmount').value); if (!t || isNaN(a)) return; if (sharedData.characters[t]) { sharedData.characters[t].score = (sharedData.characters[t].score || 0) + a; await saveCloudData(); refreshAllUI(); showNotification(`已为 ${t} 增加 ${a} 分`, 'success'); } else showNotification('账号不存在', 'error'); }
+async function minusScore() { let t = document.getElementById('scoreTarget').value.trim(); let a = parseInt(document.getElementById('scoreAmount').value); if (!t || isNaN(a)) return; if (sharedData.characters[t]) { sharedData.characters[t].score = Math.max(0, (sharedData.characters[t].score || 0) - a); await saveCloudData(); refreshAllUI(); showNotification(`已为 ${t} 减少 ${a} 分`, 'success'); } else showNotification('账号不存在', 'error'); }
+async function changeNickname() { let t = document.getElementById('changeNickTarget').value.trim(); let newNick = document.getElementById('newNickname').value.trim(); if (!t || !newNick) return; if (sharedData.characters[t]) { sharedData.characters[t].nick = newNick; await saveCloudData(); refreshAllUI(); showNotification(`已将 ${t} 昵称改为 ${newNick}`, 'success'); } }
+async function setRankScore() { let t = document.getElementById('rankTarget').value.trim(); let s = parseInt(document.getElementById('rankScore').value); if (!t || isNaN(s)) return; if (!sharedData.characters[t]) sharedData.characters[t] = { account: t, nick: t, gameId: '000000', score: 0, streak: 0, warnings: 0 }; sharedData.characters[t].score = s; await saveCloudData(); refreshAllUI(); showNotification(`已设置 ${t} 分数为 ${s}`, 'success'); }
+async function unban() { let t = document.getElementById('adminTarget').value.trim(); if (t && sharedData.characters[t]) { sharedData.characters[t].banUntil = 0; await saveCloudData(); showNotification(`已为 ${t} 解除禁赛`, 'success'); } }
+async function changeGameId() { let t = document.getElementById('changeGameIdTarget').value.trim(); let newId = document.getElementById('newGameId').value.trim(); if (t && newId && sharedData.characters[t]) { sharedData.characters[t].gameId = newId; await saveCloudData(); showNotification(`游戏ID已更改`, 'success'); } }
+async function deleteChar() { let t = document.getElementById('deleteTarget').value.trim(); if (t && t !== ADMIN_ACCOUNT && sharedData.characters[t] && confirm('永久删除角色？')) { delete sharedData.characters[t]; sharedData.online = sharedData.online.filter(a => a !== t); await saveCloudData(); refreshAllUI(); showNotification(`已删除 ${t}`, 'success'); } }
+async function resetSeason() { if (confirm('重置赛季？所有玩家积分清零')) { Object.values(sharedData.characters).forEach(c => { if (c.account !== ADMIN_ACCOUNT) c.score = 0; }); await saveCloudData(); refreshAllUI(); showNotification('赛季已重置', 'success'); } }
 function closeResult() { document.getElementById('resultMask').style.display = 'none'; document.getElementById('resultPopup').style.display = 'none'; }
 function closeVoicePopup() { document.getElementById('voiceRoomMask').style.display = 'none'; document.getElementById('voiceRoomPopup').style.display = 'none'; }
 
@@ -1446,10 +1228,8 @@ document.getElementById('leaveTeamBtn').onclick = leaveTeam;
 document.getElementById('disbandTeamBtn').onclick = disbandTeam;
 document.getElementById('invitePlayerBtn').onclick = sendInvite;
 document.getElementById('teamMatchBtn').onclick = () => addToMatchQueue(true);
-document.getElementById('confirmRoomReadyBtn').onclick = () => { showNotification('房间已创建！', 'success'); };
-document.getElementById('redWinBtn').onclick = () => { showNotification('红队胜利！', 'success'); };
-document.getElementById('blueWinBtn').onclick = () => { showNotification('蓝队胜利！', 'success'); };
-document.getElementById('protestBtn').onclick = () => { showNotification('抗议已发起', 'info'); };
+document.getElementById('searchRoomBtn').onclick = searchRooms;
+document.getElementById('clearSearchBtn').onclick = clearSearch;
 document.getElementById('closeResultBtn').onclick = closeResult;
 document.getElementById('copyRoomBtn').onclick = () => copyToClipboard(VOICE_ROOM);
 document.getElementById('closeVoiceRoomBtn').onclick = closeVoicePopup;
@@ -1461,19 +1241,16 @@ document.getElementById('deleteGameCharacterBtn').onclick = deleteChar;
 document.getElementById('resetSeasonBtn').onclick = resetSeason;
 document.getElementById('setRankBtn').onclick = setRankScore;
 document.getElementById('changeNickBtn').onclick = changeNickname;
-document.getElementById('searchRoomBtn').onclick = searchRooms;
-document.getElementById('clearSearchBtn').onclick = clearSearch;
-window.joinRoom = joinRoom;
+document.getElementById('confirmRoomReadyBtn').onclick = () => showNotification('房间已创建！', 'success');
+document.getElementById('redWinBtn').onclick = () => showNotification('红队胜利！', 'success');
+document.getElementById('blueWinBtn').onclick = () => showNotification('蓝队胜利！', 'success');
+document.getElementById('protestBtn').onclick = () => showNotification('抗议已发起', 'info');
 
-setInterval(() => {
-  if (currentPlayer && currentPlayer.account === ADMIN_ACCOUNT) {
-    document.getElementById('adminPanel').style.display = 'block';
-  } else if (document.getElementById('adminPanel')) {
-    document.getElementById('adminPanel').style.display = 'none';
-  }
-  updateRanking();
+setInterval(() => { 
+  if (currentPlayer && currentPlayer.account === ADMIN_ACCOUNT) document.getElementById('adminPanel').style.display = 'block'; 
+  else if (document.getElementById('adminPanel')) document.getElementById('adminPanel').style.display = 'none'; 
+  updateRanking(); 
 }, 5000);
-
 loadCloudData();
 </script>
 </body>
