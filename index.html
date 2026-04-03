@@ -599,10 +599,10 @@ body::before {
 <div id="resultPopup" class="popup-content"><h3 id="resultTitle">⚔️ 对局结束</h3><div id="resultContent"></div><div class="popup-buttons"><button class="btn" id="closeResultBtn">确 定</button></div></div>
 
 <script>
-// ==================== JSONBin 云端配置 ====================
-const JSONBIN_CONFIG = {
-  BIN_ID: '69cf2b21aaba882197bd9713',
-  API_KEY: '$2a$10$2vzvw0/0nbab0TrTv4bq0.DR7nsd162yKW1IrDC1A/v3/WYtxsB8.'
+// ==================== JSONSilo 配置 ====================
+const JSONSILO_CONFIG = {
+  API_URL: "https://api.jsonsilo.com/260e09bc-73df-473d-9f00-0b008464dc0e",
+  API_TOKEN: "79PEal4SaoRWSXlLMZqpQvBmh6rn1YafHBvSH5uKEu"
 };
 
 const VOICE_ROOM = '867986';
@@ -660,31 +660,38 @@ function copyToClipboard(t){ navigator.clipboard.writeText(t); showNotification(
 
 async function loadCloudData() {
   try {
-    const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}/latest`, {
-      headers: { 'X-Access-Key': JSONBIN_CONFIG.API_KEY }
+    const res = await fetch(JSONSILO_CONFIG.API_URL, {
+      headers: {
+        "X-Silo-Key": JSONSILO_CONFIG.API_TOKEN,
+        "Content-Type": "application/json"
+      }
     });
-    const data = await response.json();
-    if (data.record) {
-      sharedData = data.record;
-      if (!sharedData.matchQueue) sharedData.matchQueue = [];
-      if (!sharedData.characters) sharedData.characters = {};
-      if (!sharedData.online) sharedData.online = [];
-      if (!sharedData.teams) sharedData.teams = {};
-      if (!sharedData.invites) sharedData.invites = [];
-      if (!sharedData.matchHistory) sharedData.matchHistory = [];
+    const data = await res.json();
+    if (data) sharedData = data;
+  } catch (e) {
+    console.log("加载云端数据失败");
+    const saved = localStorage.getItem('cs_tepl_cloud');
+    if (saved) {
+      try { sharedData = JSON.parse(saved); } catch(e) {}
     }
-  } catch(e) { console.log('加载云端数据失败'); const saved = localStorage.getItem('cs_tepl_cloud'); if (saved) { try { sharedData = JSON.parse(saved); } catch(e) {} } }
+  }
   return sharedData;
 }
 
 async function saveCloudData() {
   sharedData.lastUpdate = Date.now();
   try {
-    await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_CONFIG.BIN_ID}`, {
-      method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Access-Key': JSONBIN_CONFIG.API_KEY },
+    await fetch(JSONSILO_CONFIG.API_URL, {
+      method: "PUT",
+      headers: {
+        "X-Silo-Key": JSONSILO_CONFIG.API_TOKEN,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(sharedData)
     });
-  } catch(e) { console.log('保存云端数据失败'); }
+  } catch (e) {
+    console.log("保存云端数据失败");
+  }
   localStorage.setItem('cs_tepl_cloud', JSON.stringify(sharedData));
 }
 
