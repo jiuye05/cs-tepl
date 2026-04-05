@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CS TEPL 竞技平台 - 小型电竞平台</title>
+<title>CS TEPL 竞技平台 - 专业电竞平台</title>
 <style>
 /* ==================== 全局样式 ==================== */
 * {
@@ -15,26 +15,29 @@
 :root {
   --primary: #00ffcc;
   --primary-dark: #00ccaa;
+  --primary-glow: rgba(0, 255, 204, 0.4);
   --secondary: #ff3366;
   --secondary-dark: #cc2255;
   --bg-dark: #0a0e1a;
-  --bg-card: rgba(10, 14, 26, 0.85);
+  --bg-card: rgba(15, 20, 35, 0.92);
   --text-light: #e6e6e6;
   --text-dim: #888;
-  --border-glow: 0 0 15px rgba(0, 255, 204, 0.3);
+  --border-glow: 0 0 20px rgba(0, 255, 204, 0.3);
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --card-border: 1px solid rgba(0, 255, 204, 0.15);
 }
 
 body {
-  background: radial-gradient(circle at 10% 20%, #1a1f2e, #0a0e1a);
+  background: radial-gradient(ellipse at 30% 40%, #1a1f35, #0a0e1a);
   color: var(--text-light);
-  font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+  font-family: 'Segoe UI', 'Poppins', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   padding: 20px;
   position: relative;
   overflow-x: auto;
 }
 
+/* 动态网格背景 */
 body::before {
   content: '';
   position: fixed;
@@ -42,26 +45,16 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(0,255,204,0.08)"/><circle cx="80" cy="40" r="1.5" fill="rgba(0,255,204,0.08)"/><circle cx="50" cy="85" r="2" fill="rgba(0,255,204,0.08)"/><circle cx="30" cy="70" r="1" fill="rgba(0,255,204,0.05)"/><circle cx="90" cy="15" r="1.5" fill="rgba(0,255,204,0.05)"/></svg>');
-  background-repeat: repeat;
-  opacity: 0.5;
+  background-image: 
+    linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
   pointer-events: none;
   z-index: -1;
-  animation: bgMove 60s linear infinite;
-}
-
-@keyframes bgMove {
-  from { background-position: 0 0; }
-  to { background-position: 100px 100px; }
-}
-
-/* API剩余次数显示 - 已隐藏 */
-.api-counter {
-  display: none;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -78,53 +71,69 @@ body::before {
 }
 
 .top-bar .btn-icon {
-  background: var(--bg-card);
+  background: rgba(15, 20, 35, 0.9);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 255, 204, 0.3);
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 22px;
+  color: var(--primary);
 }
 
 .top-bar .btn-icon:hover {
   transform: scale(1.1);
   border-color: var(--primary);
   box-shadow: var(--border-glow);
+  background: rgba(0, 255, 204, 0.15);
 }
 
 /* ==================== 卡片样式 ==================== */
 .card {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
-  border-radius: 28px;
-  padding: 28px;
-  border: 1px solid rgba(0, 255, 204, 0.2);
+  border-radius: 32px;
+  padding: 32px;
+  border: var(--card-border);
   box-shadow: var(--shadow);
-  margin-bottom: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), transparent);
+  border-radius: 32px 32px 0 0;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 255, 204, 0.35);
 }
 
 .title {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 800;
   text-align: center;
-  background: linear-gradient(135deg, var(--primary), #88ffcc);
+  background: linear-gradient(135deg, #00ffcc, #88ffcc, #00ffaa);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   margin-bottom: 20px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .title small {
@@ -142,8 +151,8 @@ body::before {
   width: 100%;
   padding: 14px 18px;
   background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(0, 255, 204, 0.3);
-  border-radius: 14px;
+  border: 1px solid rgba(0, 255, 204, 0.25);
+  border-radius: 16px;
   color: var(--text-light);
   font-size: 15px;
   transition: all 0.3s ease;
@@ -153,29 +162,51 @@ body::before {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(0, 255, 204, 0.1);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.input-field.error {
+  border-color: #ff3366;
+  box-shadow: 0 0 0 2px rgba(255, 51, 102, 0.2);
 }
 
 .btn {
-  padding: 12px 24px;
+  padding: 12px 28px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #0a0e1a;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
   transition: all 0.3s ease;
   margin: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 204, 0.3);
-}
-
-.btn:active {
-  transform: translateY(1px);
+  box-shadow: 0 8px 25px rgba(0, 255, 204, 0.4);
 }
 
 .btn-secondary {
@@ -199,25 +230,25 @@ body::before {
 }
 
 .btn-sm {
-  padding: 6px 14px;
+  padding: 8px 18px;
   font-size: 12px;
 }
 
 .status-card {
-  background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(0, 0, 0, 0.5));
-  border-radius: 24px;
-  padding: 20px;
+  background: linear-gradient(135deg, rgba(0, 255, 204, 0.08), rgba(0, 0, 0, 0.5));
+  border-radius: 28px;
+  padding: 25px;
   margin: 20px 0;
   text-align: center;
   border: 1px solid rgba(0, 255, 204, 0.2);
 }
 
 .status-text {
-  font-size: 42px;
+  font-size: 48px;
   font-weight: bold;
   color: #ffaa44;
   margin: 10px 0;
-  text-shadow: 0 0 10px rgba(255, 170, 68, 0.5);
+  text-shadow: 0 0 15px rgba(255, 170, 68, 0.5);
 }
 
 .match-timer {
@@ -247,25 +278,31 @@ body::before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .info-label {
   color: var(--primary);
   font-weight: 600;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .info-value {
   color: white;
   font-weight: 500;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
 }
 
 .leaderboard {
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 24px;
-  padding: 18px;
+  border-radius: 28px;
+  padding: 20px;
   margin-top: 20px;
   border: 1px solid rgba(0, 255, 204, 0.15);
 }
@@ -285,11 +322,11 @@ body::before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 8px;
+  padding: 12px 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   cursor: pointer;
   transition: all 0.2s;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 .leaderboard-item:hover {
@@ -301,6 +338,7 @@ body::before {
   font-weight: bold;
   width: 45px;
   color: #ffaa44;
+  font-size: 16px;
 }
 
 .leaderboard-name {
@@ -308,7 +346,7 @@ body::before {
   margin-left: 10px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -316,35 +354,36 @@ body::before {
   font-family: monospace;
   font-weight: bold;
   color: var(--primary);
-  min-width: 70px;
+  min-width: 80px;
   text-align: right;
+  font-size: 14px;
 }
 
 .rank-badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 20px;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 30px;
   font-size: 11px;
   font-weight: bold;
 }
 
-.rank-传奇王者 { background: linear-gradient(135deg, #ff3366, #cc0044); color: white; box-shadow: 0 0 8px #ff3366; }
-.rank-至尊王者 { background: linear-gradient(135deg, #ff66cc, #cc33aa); color: white; box-shadow: 0 0 8px #ff66cc; }
-.rank-荣耀王者 { background: linear-gradient(135deg, #ffaa00, #ff6600); color: #0a0e1a; box-shadow: 0 0 8px #ffaa00; }
-.rank-王者 { background: linear-gradient(135deg, #ffcc44, #ffaa00); color: #0a0e1a; box-shadow: 0 0 8px #ffcc44; }
-.rank-钻石 { background: linear-gradient(135deg, #00ccff, #0099cc); color: white; box-shadow: 0 0 8px #00ccff; }
-.rank-铂金 { background: linear-gradient(135deg, #88ffaa, #44cc66); color: #0a0e1a; box-shadow: 0 0 8px #88ffaa; }
-.rank-黄金 { background: linear-gradient(135deg, #ffaa66, #ff8844); color: #0a0e1a; box-shadow: 0 0 8px #ffaa66; }
+.rank-传奇王者 { background: linear-gradient(135deg, #ff3366, #cc0044); color: white; box-shadow: 0 0 10px #ff3366; }
+.rank-至尊王者 { background: linear-gradient(135deg, #ff66cc, #cc33aa); color: white; box-shadow: 0 0 10px #ff66cc; }
+.rank-荣耀王者 { background: linear-gradient(135deg, #ffaa00, #ff6600); color: #0a0e1a; box-shadow: 0 0 10px #ffaa00; }
+.rank-王者 { background: linear-gradient(135deg, #ffcc44, #ffaa00); color: #0a0e1a; box-shadow: 0 0 10px #ffcc44; }
+.rank-钻石 { background: linear-gradient(135deg, #00ccff, #0099cc); color: white; box-shadow: 0 0 10px #00ccff; }
+.rank-铂金 { background: linear-gradient(135deg, #88ffaa, #44cc66); color: #0a0e1a; }
+.rank-黄金 { background: linear-gradient(135deg, #ffaa66, #ff8844); color: #0a0e1a; }
 .rank-白银 { background: linear-gradient(135deg, #ccccdd, #aaaabb); color: #0a0e1a; }
-.rank-青铜 { background: linear-gradient(135deg, #cd7f32, #b86f22); color: white; box-shadow: 0 0 8px #cd7f32; }
+.rank-青铜 { background: linear-gradient(135deg, #cd7f32, #b86f22); color: white; }
 
 .team-box {
   margin-top: 20px;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 24px;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 28px;
   border: 1px solid var(--primary);
   display: none;
 }
@@ -353,11 +392,16 @@ body::before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  padding: 12px 16px;
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 14px;
-  margin-bottom: 8px;
+  border-radius: 16px;
+  margin-bottom: 10px;
   transition: all 0.2s;
+}
+
+.team-member:hover {
+  background: rgba(0, 255, 204, 0.1);
+  transform: translateX(5px);
 }
 
 .team-member-owner {
@@ -369,6 +413,46 @@ body::before {
   font-size: 11px;
   color: #ffaa44;
   margin-left: 8px;
+  background: rgba(0,0,0,0.5);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.search-area {
+  background: linear-gradient(135deg, rgba(0, 255, 204, 0.05), rgba(0, 0, 0, 0.3));
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 255, 204, 0.15);
+}
+
+.search-area .info-label {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.search-results {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 12px;
+}
+
+.room-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  border: 1px solid rgba(0, 255, 204, 0.1);
+}
+
+.room-item:hover {
+  background: rgba(0, 255, 204, 0.1);
+  transform: translateX(3px);
+  border-color: rgba(0, 255, 204, 0.3);
 }
 
 .popup-mask {
@@ -377,11 +461,10 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(12px);
   z-index: 1000;
   display: none;
-  animation: fadeIn 0.2s ease;
 }
 
 .popup-content {
@@ -389,15 +472,15 @@ body::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--bg-card);
+  background: linear-gradient(135deg, rgba(20, 25, 45, 0.95), rgba(10, 14, 26, 0.98));
   backdrop-filter: blur(16px);
-  border-radius: 32px;
-  padding: 32px;
-  min-width: 400px;
-  max-width: 600px;
+  border-radius: 40px;
+  padding: 35px;
+  min-width: 420px;
+  max-width: 550px;
   text-align: center;
   border: 1px solid var(--primary);
-  box-shadow: var(--shadow);
+  box-shadow: 0 0 50px rgba(0, 255, 204, 0.2);
   z-index: 1001;
   display: none;
   animation: popIn 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
@@ -409,13 +492,16 @@ body::before {
 }
 
 .voice-room-number {
-  font-size: 52px;
+  font-size: 56px;
   font-weight: bold;
   color: #ffaa44;
   font-family: monospace;
-  letter-spacing: 6px;
+  letter-spacing: 8px;
   margin: 20px 0;
-  text-shadow: 0 0 15px rgba(255, 170, 68, 0.5);
+  text-shadow: 0 0 20px rgba(255, 170, 68, 0.5);
+  background: rgba(0,0,0,0.5);
+  padding: 15px;
+  border-radius: 20px;
 }
 
 .notification-bar {
@@ -431,10 +517,10 @@ body::before {
 }
 
 .notification {
-  background: var(--bg-card);
+  background: linear-gradient(135deg, rgba(15, 20, 35, 0.95), rgba(10, 14, 26, 0.95));
   backdrop-filter: blur(12px);
   border-left: 4px solid var(--primary);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 14px 18px;
   animation: slideInRight 0.3s ease;
   pointer-events: auto;
@@ -443,7 +529,7 @@ body::before {
   box-shadow: var(--shadow);
 }
 
-.notification:hover { transform: translateX(-5px); }
+.notification:hover { transform: translateX(-5px); background: rgba(0, 255, 204, 0.1); }
 
 @keyframes slideInRight {
   from { transform: translateX(100%); opacity: 0; }
@@ -452,12 +538,13 @@ body::before {
 
 .online-badge {
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background-color: #00ff00;
   border-radius: 50%;
   margin-right: 8px;
   animation: pulse 1.5s infinite;
+  box-shadow: 0 0 5px #00ff00;
 }
 
 @keyframes pulse {
@@ -467,49 +554,34 @@ body::before {
 
 .match-history {
   background: rgba(0, 0, 0, 0.4);
-  border-radius: 24px;
-  padding: 18px;
+  border-radius: 28px;
+  padding: 20px;
   margin-top: 20px;
 }
 
 .match-history h3 {
   color: var(--primary);
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-size: 16px;
 }
 
 .history-item {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   font-size: 13px;
 }
 
-.history-win { color: #00ff00; }
-.history-loss { color: #ff3366; }
+.history-win { color: #00ff00; font-weight: bold; }
+.history-loss { color: #ff3366; font-weight: bold; }
 
 .hidden { display: none; }
 .text-center { text-align: center; }
 .mt-20 { margin-top: 20px; }
 
-.search-results {
-  max-height: 300px;
-  overflow-y: auto;
-  margin-top: 10px;
-}
-.room-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: rgba(0,0,0,0.4);
-  border-radius: 12px;
-  margin-bottom: 8px;
-}
-
 .pwd-popup .input-group {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   text-align: left;
 }
 .pwd-popup .input-field {
@@ -519,14 +591,40 @@ body::before {
   font-size: 12px;
   color: #ffaa44;
   margin-top: 10px;
+  background: rgba(0,0,0,0.3);
+  padding: 8px;
+  border-radius: 12px;
+}
+
+/* 注册提示样式 */
+.input-hint {
+  font-size: 11px;
+  margin-top: 5px;
+  margin-left: 5px;
+  display: block;
+}
+.input-hint.error {
+  color: #ff6666;
+}
+.input-hint.success {
+  color: #00ffcc;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
 }
 </style>
 </head>
 <body>
-<!-- API剩余次数显示 - 已隐藏 -->
-<div class="api-counter" style="display:none;">
-    📊 API剩余: <span id="apiRemaining">--</span> 次
-</div>
 
 <div class="top-bar" id="topBar" style="display: none;">
   <div class="btn-icon" id="refreshBtn" title="刷新竞技大厅">🔄</div>
@@ -539,7 +637,7 @@ body::before {
 
   <!-- 登录界面 -->
   <div id="loginView" class="card">
-    <div class="title">CS TEPL<span style="font-size: 14px;">⚡</span><small>Counter-Strike Tactical Esports Pro League</small></div>
+    <div class="title">⚡ CS TEPL 竞技平台<small>Counter-Strike Tactical Esports Pro League</small></div>
     <div class="subtitle" style="text-align:center; color:#888; margin-bottom:20px;">使用 Paw 账号登录</div>
     <div class="input-group"><input type="text" id="pawAccount" class="input-field" placeholder="Paw 账号" maxlength="20"></div>
     <div class="input-group"><input type="password" id="pawPassword" class="input-field" placeholder="Paw 密码"></div>
@@ -566,15 +664,15 @@ body::before {
   <!-- 游戏大厅 -->
   <div id="gameHall" class="hidden">
     <div class="card">
-      <div class="title">CS TEPL 竞技大厅<span style="font-size: 12px;">⚡</span><small>Counter-Strike Tactical Esports Pro League</small></div>
+      <div class="title">🎯 CS TEPL 竞技大厅<small>实时匹配 · 公平竞技</small></div>
       
-      <div class="info-row"><span class="info-label">Paw 账号：</span><span class="info-value" id="displayPawAccount">-</span></div>
-      <div class="info-row"><span class="info-label">游戏昵称：</span><span class="info-value" id="displayNickname">-</span></div>
-      <div class="info-row"><span class="info-label">游戏ID：</span><span class="info-value" id="displayGameId">-</span></div>
-      <div class="info-row"><span class="info-label">TEPL积分：</span><span class="info-value" id="displayScore">0</span></div>
-      <div class="info-row"><span class="info-label">段位：</span><span class="info-value" id="displayRank">青铜</span><span id="rankBadge"></span></div>
-      <div class="info-row"><span class="info-label">连胜/连败：</span><span class="info-value" id="displayStreak">0</span></div>
-      <div class="info-row"><span class="info-label">警告次数：</span><span class="info-value" id="displayWarnings">0</span></div>
+      <div class="info-row"><span class="info-label">👤 Paw 账号：</span><span class="info-value" id="displayPawAccount">-</span></div>
+      <div class="info-row"><span class="info-label">🏷️ 游戏昵称：</span><span class="info-value" id="displayNickname">-</span></div>
+      <div class="info-row"><span class="info-label">🆔 游戏ID：</span><span class="info-value" id="displayGameId">-</span></div>
+      <div class="info-row"><span class="info-label">⭐ TEPL积分：</span><span class="info-value" id="displayScore">0</span></div>
+      <div class="info-row"><span class="info-label">🏆 段位：</span><span class="info-value" id="displayRank">青铜</span><span id="rankBadge"></span></div>
+      <div class="info-row"><span class="info-label">🔥 连胜/连败：</span><span class="info-value" id="displayStreak">0</span></div>
+      <div class="info-row"><span class="info-label">⚠️ 警告次数：</span><span class="info-value" id="displayWarnings">0</span></div>
       <div class="info-row"><span class="info-label"><span class="online-badge"></span>在线玩家：</span><span class="info-value" id="onlineCount">0</span></div>
       
       <div class="status-card">
@@ -596,21 +694,20 @@ body::before {
     
     <!-- 队伍系统 -->
     <div id="teamSystem" class="team-box">
-      <div class="info-row"><span class="info-label">🏠 我的队伍</span><span id="teamCount">0/5</span></div>
+      <div class="info-row"><span class="info-label">🏠 我的队伍</span><span class="info-value" id="teamCount">0/5</span></div>
       <div id="teamList"></div>
       
-      <!-- 合并后的搜索区域 -->
-      <div style="margin: 15px 0;">
-        <div class="info-label" style="margin-bottom: 8px;">🔍 搜索房间 (支持房间名称/ID)</div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <input type="text" id="searchRoomInput" class="input-field" placeholder="输入房间名称或ID" maxlength="20" style="flex:1;">
-          <button class="btn btn-sm" id="searchRoomBtn">搜索</button>
-          <button class="btn btn-sm btn-secondary" id="clearSearchBtn">清除</button>
+      <div class="search-area">
+        <div class="info-label">🔍 搜索房间 (输入房间名称或ID)</div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <input type="text" id="searchRoomInput" class="input-field" placeholder="例如: 战队招募 或 我的房间" maxlength="20" style="flex:1;">
+          <button class="btn btn-sm" id="searchRoomBtn">🔎 搜索</button>
+          <button class="btn btn-sm btn-secondary" id="clearSearchBtn">🗑️ 清除</button>
         </div>
         <div id="searchResults" class="search-results"></div>
       </div>
       
-      <div class="input-group"><input type="text" id="roomName" class="input-field" placeholder="创建房间名称" maxlength="20"></div>
+      <div class="input-group"><input type="text" id="roomName" class="input-field" placeholder="🏠 创建房间名称" maxlength="20"></div>
       <div class="text-center">
         <button class="btn btn-sm" id="createRoomBtn">🏠 创建房间</button>
         <button class="btn btn-sm btn-secondary" id="leaveTeamBtn">🚪 离开队伍</button>
@@ -618,22 +715,19 @@ body::before {
         <button class="btn btn-sm" id="invitePlayerBtn">📨 邀请玩家</button>
         <button class="btn btn-sm" id="teamMatchBtn">🎯 组队匹配</button>
       </div>
-      <div class="info-note" style="margin-top:10px; font-size:11px; color:#ffaa44;">💡 只有房主可以开始组队匹配</div>
+      <div class="info-note" style="margin-top:10px; font-size:11px; color:#ffaa44; text-align:center;">💡 只有房主可以开始组队匹配</div>
     </div>
     
-    <!-- 对局面板 -->
-    <div id="matchPanel" class="match-info hidden" style="background: linear-gradient(135deg, rgba(0,255,204,0.1), rgba(0,0,0,0.6)); border-radius:24px; padding:20px; margin:15px 0; text-align:center;">
-      <h3>⚔️ 当前对局</h3>
-      <div id="matchInfo"></div>
-      <div id="roomReadyBox" class="hidden" style="margin-top: 15px;"><button class="btn btn-success" id="confirmRoomReadyBtn">✅ 我已创建完房间</button></div>
-      <div id="hostWinBox" class="hidden" style="margin-top: 15px;">
-        <p style="margin-bottom:10px; color:#ffaa44;">👑 房主请判定胜负</p>
+    <div id="matchPanel" class="match-info hidden" style="background: linear-gradient(135deg, rgba(0,255,204,0.1), rgba(0,0,0,0.6)); border-radius:28px; padding:25px; margin:15px 0; text-align:center;">
+      <h3 style="color:var(--primary);">⚔️ 当前对局</h3>
+      <div id="matchInfo" style="margin-top:15px;"></div>
+      <div id="hostWinBox" class="hidden" style="margin-top: 20px;">
+        <p style="margin-bottom:15px; color:#ffaa44;">👑 房主请判定胜负</p>
         <button class="btn btn-success" id="redWinBtn">🔴 红队胜利</button>
         <button class="btn btn-primary" id="blueWinBtn">🔵 蓝队胜利</button>
       </div>
     </div>
     
-    <!-- 对局历史 -->
     <div class="match-history" id="matchHistory">
       <h3>📜 最近对局</h3>
       <div id="matchHistoryList"></div>
@@ -641,34 +735,32 @@ body::before {
     
     <div class="leaderboard"><h3>🏆 TEPL 排行榜 Top 20</h3><div id="currentRanking"></div></div>
     
-    <!-- 管理员面板 -->
-    <div id="adminPanel" class="admin-panel" style="background:rgba(255,51,102,0.1); border:1px solid #ff3366; border-radius:24px; padding:18px; margin-top:20px; display:none;">
+    <div id="adminPanel" class="admin-panel" style="background:rgba(255,51,102,0.08); border:1px solid #ff3366; border-radius:28px; padding:20px; margin-top:20px; display:none;">
       <div class="admin-title" style="color:#ff3366; font-size:18px; margin-bottom:15px;">🔧 管理员控制台</div>
-      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;"><input id="adminTarget" placeholder="目标Paw账号" style="flex:1; padding:8px; background:rgba(0,0,0,0.6); border:1px solid #ff3366; border-radius:10px;"><button class="btn-sm" id="unbanUserBtn">解除禁赛</button></div>
-      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;"><input id="scoreTarget" placeholder="目标Paw账号" style="flex:1; padding:8px;"><input id="scoreAmount" placeholder="分数" type="number" style="flex:1;"><button class="btn-sm" id="addScoreBtn">加分</button><button class="btn-sm btn-danger" id="minusScoreBtn">减分</button></div>
-      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;"><input id="changeNickTarget" placeholder="目标Paw账号" style="flex:1; padding:8px;"><input id="newNickname" placeholder="新游戏昵称" style="flex:1; padding:8px;"><button class="btn-sm btn-warning" id="changeNickBtn">✏️ 更改昵称</button></div>
-      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;"><input id="changeGameIdTarget" placeholder="目标Paw账号" style="flex:1;"><input id="newGameId" placeholder="新游戏ID" style="flex:1;"><button class="btn-sm btn-warning" id="changeGameIdBtn">改ID</button></div>
-      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;"><input id="deleteTarget" placeholder="要注销的Paw账号" style="flex:1;"><button class="btn-sm btn-danger" id="deleteGameCharacterBtn">⚠️ 注销游戏角色</button></div>
-      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;"><input id="rankTarget" placeholder="要上榜的Paw账号" style="flex:1;"><input id="rankScore" placeholder="指定分数" type="number" style="flex:1;"><button class="btn-sm btn-success" id="setRankBtn">📊 设置排行榜分数</button></div>
+      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"><input id="adminTarget" placeholder="目标Paw账号" style="flex:1; padding:10px; background:rgba(0,0,0,0.6); border:1px solid #ff3366; border-radius:12px;"><button class="btn-sm" id="unbanUserBtn">解除禁赛</button></div>
+      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"><input id="scoreTarget" placeholder="目标Paw账号" style="flex:1; padding:10px;"><input id="scoreAmount" placeholder="分数" type="number" style="flex:1; padding:10px;"><button class="btn-sm" id="addScoreBtn">加分</button><button class="btn-sm btn-danger" id="minusScoreBtn">减分</button></div>
+      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"><input id="changeNickTarget" placeholder="目标Paw账号" style="flex:1; padding:10px;"><input id="newNickname" placeholder="新游戏昵称" style="flex:1; padding:10px;"><button class="btn-sm btn-warning" id="changeNickBtn">更改昵称</button></div>
+      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"><input id="changeGameIdTarget" placeholder="目标Paw账号" style="flex:1; padding:10px;"><input id="newGameId" placeholder="新游戏ID" style="flex:1; padding:10px;"><button class="btn-sm btn-warning" id="changeGameIdBtn">改ID</button></div>
+      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"><input id="deleteTarget" placeholder="要注销的Paw账号" style="flex:1; padding:10px;"><button class="btn-sm btn-danger" id="deleteGameCharacterBtn">注销游戏角色</button></div>
+      <div class="admin-row" style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;"><input id="rankTarget" placeholder="要上榜的Paw账号" style="flex:1; padding:10px;"><input id="rankScore" placeholder="指定分数" type="number" style="flex:1; padding:10px;"><button class="btn-sm btn-success" id="setRankBtn">设置排行榜分数</button></div>
       <div class="admin-row"><button class="btn-sm btn-warning" id="resetSeasonBtn">重置赛季</button></div>
     </div>
   </div>
 </div>
 
-<!-- 修改密码弹窗 -->
+<!-- 弹窗 -->
 <div id="changePasswordMask" class="popup-mask"></div>
 <div id="changePasswordPopup" class="popup-content pwd-popup">
-  <h3>🔒 修改密码</h3>
+  <h3 style="color:var(--primary);">🔒 修改密码</h3>
   <div class="input-group" style="margin-top:20px;"><input type="password" id="oldPassword" class="input-field" placeholder="当前密码"></div>
   <div class="input-group"><input type="password" id="newPassword" class="input-field" placeholder="新密码 (至少3位)"></div>
   <div class="input-group"><input type="password" id="confirmPassword" class="input-field" placeholder="确认新密码"></div>
   <div class="popup-buttons"><button class="btn" id="submitChangePwdBtn">确认修改</button><button class="btn btn-secondary" id="cancelChangePwdBtn">取消</button></div>
 </div>
 
-<!-- 忘记密码弹窗（带邮箱验证） -->
 <div id="forgotPasswordMask" class="popup-mask"></div>
 <div id="forgotPasswordPopup" class="popup-content pwd-popup">
-  <h3>🔑 找回密码</h3>
+  <h3 style="color:var(--primary);">🔑 找回密码</h3>
   <div class="input-group" style="margin-top:20px;"><input type="text" id="forgotAccount" class="input-field" placeholder="输入 Paw 账号"></div>
   <div class="input-group"><input type="email" id="forgotEmail" class="input-field" placeholder="绑定邮箱"></div>
   <div class="input-group"><input type="password" id="newPasswordReset" class="input-field" placeholder="新密码 (至少3位)"></div>
@@ -677,25 +769,35 @@ body::before {
   <div class="popup-buttons"><button class="btn" id="submitResetPwdBtn">确认重置</button><button class="btn btn-secondary" id="cancelResetPwdBtn">取消</button></div>
 </div>
 
-<!-- 注册弹窗（带邮箱绑定） -->
 <div id="registerMask" class="popup-mask"></div>
 <div id="registerPopup" class="popup-content pwd-popup">
-  <h3>📝 注册新账号</h3>
-  <div class="input-group" style="margin-top:20px;"><input type="text" id="regAccount" class="input-field" placeholder="Paw 账号 (3-20位字母数字)" maxlength="20"></div>
-  <div class="input-group"><input type="password" id="regPassword" class="input-field" placeholder="密码 (至少3位)"></div>
-  <div class="input-group"><input type="password" id="regConfirmPassword" class="input-field" placeholder="确认密码"></div>
-  <div class="input-group"><input type="email" id="regEmail" class="input-field" placeholder="绑定邮箱 (用于找回密码)"></div>
+  <h3 style="color:var(--primary);">📝 注册新账号</h3>
+  <div class="input-group" style="margin-top:20px;">
+    <input type="text" id="regAccount" class="input-field" placeholder="Paw 账号 (3-20位字母数字)" maxlength="20">
+    <span class="input-hint" id="regAccountHint"></span>
+  </div>
+  <div class="input-group">
+    <input type="password" id="regPassword" class="input-field" placeholder="密码 (至少3位)">
+    <span class="input-hint" id="regPasswordHint"></span>
+  </div>
+  <div class="input-group">
+    <input type="password" id="regConfirmPassword" class="input-field" placeholder="确认密码">
+    <span class="input-hint" id="regConfirmHint"></span>
+  </div>
+  <div class="input-group">
+    <input type="email" id="regEmail" class="input-field" placeholder="绑定邮箱 (用于找回密码)">
+    <span class="input-hint" id="regEmailHint"></span>
+  </div>
   <div class="forgot-note">💡 邮箱用于找回密码，请填写真实邮箱</div>
   <div class="popup-buttons"><button class="btn" id="submitRegisterBtn">注册</button><button class="btn btn-secondary" id="cancelRegisterBtn">取消</button></div>
 </div>
 
-<!-- 其他弹窗 -->
 <div id="voiceRoomMask" class="popup-mask"></div>
-<div id="voiceRoomPopup" class="popup-content voice-room-popup"><h3>🎙️ CS TEPL 语音频道</h3><p>匹配成功！请进入语音房间与队友沟通</p><div class="voice-room-number" id="voiceRoomNumber">867986</div><p>📱 下载黑盒APP，输入房间号进入语音房</p><div class="popup-buttons"><button class="btn copy-btn" id="copyRoomBtn">📋 复制房间号</button><button class="btn btn-secondary" id="closeVoiceRoomBtn">开始游戏</button></div></div>
+<div id="voiceRoomPopup" class="popup-content voice-room-popup"><h3 style="color:var(--primary);">🎙️ CS TEPL 语音频道</h3><p>匹配成功！请进入语音房间与队友沟通</p><div class="voice-room-number" id="voiceRoomNumber">867986</div><p>📱 下载黑盒APP，输入房间号进入语音房</p><div class="popup-buttons"><button class="btn copy-btn" id="copyRoomBtn">📋 复制房间号</button><button class="btn btn-secondary" id="closeVoiceRoomBtn">开始游戏</button></div></div>
 <div id="inviteMask" class="popup-mask"></div>
-<div id="invitePopup" class="popup-content"><h3>🎮 组队邀请</h3><p>邀请人：<strong id="inviterName"></strong></p><p>房间：<strong id="inviterRoom"></strong></p><div class="popup-buttons"><button class="btn" id="acceptInviteBtn">接受</button><button class="btn btn-secondary" id="rejectInviteBtn">拒绝</button></div></div>
+<div id="invitePopup" class="popup-content"><h3 style="color:var(--primary);">🎮 组队邀请</h3><p>邀请人：<strong id="inviterName"></strong></p><p>房间：<strong id="inviterRoom"></strong></p><div class="popup-buttons"><button class="btn" id="acceptInviteBtn">接受</button><button class="btn btn-secondary" id="rejectInviteBtn">拒绝</button></div></div>
 <div id="resultMask" class="popup-mask"></div>
-<div id="resultPopup" class="popup-content"><h3 id="resultTitle">⚔️ 对局结束</h3><div id="resultContent"></div><div class="popup-buttons"><button class="btn" id="closeResultBtn">确 定</button></div></div>
+<div id="resultPopup" class="popup-content"><h3 id="resultTitle">⚔️ 对局结束</h3><div id="resultContent"></div><div class="popup-buttons"><button class="btn" id="closeResultBtn">确定</button></div></div>
 
 <script>
 // ==================== JSONBin 云端配置 ====================
@@ -704,19 +806,17 @@ const JSONBIN_CONFIG = {
   API_KEY: '$2a$10$hh5dRE1KRBUkiM6MU52cpeAKzqWPp0jcG8U9mM5GLvGr34DZtXLMW'
 };
 
-// 账号邮箱绑定存储（独立于游戏数据）
 let emailBindings = JSON.parse(localStorage.getItem('paw_email_bindings') || '{}');
 
 const VOICE_ROOM = '867986';
 const SCORE_WIN = 15;
 const SCORE_LOSS = -8;
-const MAPS = ['Rust', 'Zone7', 'Dune', 'Breeze', 'Province', 'Sakura', 'Sandstone', '监狱'];
+const MAPS = ['🏜️ Rust', '🏭 Zone7', '🏖️ Dune', '🌊 Breeze', '🏛️ Province', '🌸 Sakura', '⛰️ Sandstone', '🏰 监狱'];
 const WAIT_TIMEOUT = 300000;
 const MAX_TEAM_SIZE = 5;
 const ADMIN_ACCOUNT = 'qiye666';
-
-// 自动刷新间隔：5分钟 = 300000毫秒
-const AUTO_REFRESH_INTERVAL = 300000;
+const AUTO_REFRESH_INTERVAL = 60000; // 1分钟
+const RANKING_REFRESH_INTERVAL = 300000; // 5分钟
 
 const RANK_ICONS = {
   '传奇王者': '👑', '至尊王者': '⭐', '荣耀王者': '🌟', '王者': '🏆',
@@ -732,6 +832,7 @@ let currentPlayer = null;
 let isMatching = false;
 let matchTimer = null;
 let updateInterval = null;
+let rankingInterval = null;
 let waitTimeoutTriggered = false;
 let matchStartTime = null;
 let inviteChecker = null;
@@ -803,7 +904,6 @@ async function saveCloudData() {
   localStorage.setItem('cs_tepl_cloud', JSON.stringify(sharedData)); 
 }
 
-// 刷新UI（静默刷新，不弹提示）
 async function silentRefreshUI() { 
   await loadCloudData(); 
   updateRanking(); 
@@ -821,7 +921,6 @@ async function silentRefreshUI() {
   document.getElementById('onlineCount').innerText = sharedData.online?.length || 0; 
 }
 
-// 手动刷新（显示提示）
 async function manualRefreshLobby() { 
   await silentRefreshUI();
   showNotification('竞技大厅已刷新', 'success'); 
@@ -847,12 +946,12 @@ function updateMatchHistoryDisplay() {
   const container = document.getElementById('matchHistoryList'); 
   const history = sharedData.matchHistory || []; 
   if (history.length === 0) { 
-    container.innerHTML = '<div style="padding:15px;text-align:center;color:#888;">暂无对局记录</div>'; 
+    container.innerHTML = '<div style="padding:20px;text-align:center;color:#888;">暂无对局记录</div>'; 
     return; 
   } 
   container.innerHTML = history.slice(0, 10).map(h => { 
     const isWin = currentPlayer && h.players?.includes(currentPlayer.account); 
-    return `<div class="history-item"><span class="${isWin ? 'history-win' : 'history-loss'}">${isWin ? '🏆 胜利' : '💔 失败'}</span><span>🗺️ ${h.map}</span><span style="font-size:11px; color:#888;">${new Date(h.time).toLocaleString()}</span></div>`; 
+    return `<div class="history-item"><span class="${isWin ? 'history-win' : 'history-loss'}">${isWin ? '🏆 胜利' : '💔 失败'}</span><span>${h.map}</span><span style="font-size:11px; color:#888;">${new Date(h.time).toLocaleString()}</span></div>`; 
   }).join(''); 
 }
 
@@ -871,6 +970,8 @@ async function joinRoom(roomName) {
   await saveCloudData(); 
   updateTeamDisplay(); 
   showNotification(`已加入房间 "${roomName}"`, 'success'); 
+  document.getElementById('searchRoomInput').value = '';
+  document.getElementById('searchResults').innerHTML = '<div style="padding:30px;text-align:center;color:#888;">🔍 输入房间名称或ID进行搜索</div>';
 }
 
 function updateTeamDisplay() { 
@@ -878,7 +979,7 @@ function updateTeamDisplay() {
   const teamList = document.getElementById('teamList'); 
   const teamCount = document.getElementById('teamCount'); 
   if (!team) { 
-    teamList.innerHTML = '<div style="padding:20px;text-align:center;color:#888;">暂未加入队伍<br>点击"创建房间"开始组队</div>'; 
+    teamList.innerHTML = '<div style="padding:30px;text-align:center;color:#888;">暂未加入队伍<br>点击"创建房间"开始组队</div>'; 
     teamCount.textContent = `0/${MAX_TEAM_SIZE}`; 
     return; 
   } 
@@ -1132,9 +1233,9 @@ function updateRanking() {
   let html = list.map((c, i) => { 
     const rank = getRank(c.score); 
     const rankIcon = getRankIcon(rank); 
-    return `<div class="leaderboard-item" onclick="showProfile('${c.account}')"><span class="leaderboard-rank">${i + 1}</span><span class="leaderboard-name">${c.nick || c.account}<span class="rank-badge rank-${rank}" style="font-size:10px; padding:2px 6px;">${rankIcon} ${rank}</span></span><span class="leaderboard-score">${c.score}分</span></div>`; 
+    return `<div class="leaderboard-item" onclick="showProfile('${c.account}')"><span class="leaderboard-rank">${i + 1}</span><span class="leaderboard-name">${c.nick || c.account}<span class="rank-badge rank-${rank}" style="font-size:10px; padding:2px 8px;">${rankIcon} ${rank}</span></span><span class="leaderboard-score">${c.score}分</span></div>`; 
   }).join(''); 
-  document.getElementById('currentRanking').innerHTML = html || '<div style="padding:20px;text-align:center;">暂无数据</div>'; 
+  document.getElementById('currentRanking').innerHTML = html || '<div style="padding:30px;text-align:center;color:#888;">暂无数据</div>'; 
 }
 
 function showProfile(acc) { 
@@ -1143,6 +1244,262 @@ function showProfile(acc) {
   const rank = getRank(c.score); 
   const rankIcon = getRankIcon(rank); 
   alert(`━━━━━━━━━━━━━━━━━━━━━\n🎮 玩家资料\n━━━━━━━━━━━━━━━━━━━━━\n\n昵称: ${c.nick || c.account}\n游戏ID: ${c.gameId}\nPaw账号: ${c.account}\n\n🏆 TEPL积分: ${c.score}\n⭐ 段位: ${rankIcon} ${rank}\n📊 连胜/连败: ${c.streak || 0}\n⚠️ 警告次数: ${c.warnings || 0}`); 
+}
+
+// 搜索房间功能
+function searchRooms() { 
+  const searchTerm = document.getElementById('searchRoomInput').value.trim(); 
+  const resultsDiv = document.getElementById('searchResults'); 
+  
+  loadCloudData().then(() => {
+    if (!searchTerm) { 
+      resultsDiv.innerHTML = '<div style="padding:30px;text-align:center;color:#888;">🔍 输入房间名称或ID进行搜索</div>'; 
+      return; 
+    } 
+    
+    const allRooms = Object.values(sharedData.teams || {});
+    if (allRooms.length === 0) {
+      resultsDiv.innerHTML = '<div style="padding:30px;text-align:center;color:#888;">📭 暂无任何房间，快去创建第一个吧！</div>';
+      return;
+    }
+    
+    let matchedRooms = allRooms.filter(room => room.roomName === searchTerm);
+    if (matchedRooms.length === 0) {
+      matchedRooms = allRooms.filter(room => room.roomName.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+    
+    if (matchedRooms.length === 0) { 
+      resultsDiv.innerHTML = `<div style="padding:30px;text-align:center;color:#888;">❌ 未找到匹配的房间 "${searchTerm}"<br>可尝试输入完整的房间名称</div>`; 
+      return; 
+    } 
+    
+    resultsDiv.innerHTML = matchedRooms.map(room => `
+      <div class="room-item">
+        <div>
+          <span style="font-weight:bold; font-size:16px;">🏠 ${room.roomName}</span>
+          <span style="font-size:12px; color:#888; margin-left:10px;">👥 ${room.members.length}/${MAX_TEAM_SIZE}</span>
+          <span style="font-size:11px; color:#ffaa44; margin-left:10px;">👑 ${sharedData.characters[room.owner]?.nick || room.owner}</span>
+        </div>
+        <button class="btn btn-sm btn-success" onclick="joinRoom('${room.roomName}')">➕ 加入</button>
+      </div>
+    `).join(''); 
+  });
+}
+
+function clearSearch() { 
+  document.getElementById('searchRoomInput').value = ''; 
+  document.getElementById('searchResults').innerHTML = '<div style="padding:30px;text-align:center;color:#888;">🔍 输入房间名称或ID进行搜索</div>'; 
+}
+
+// ==================== 注册验证功能 ====================
+function validateAccount() {
+  const acc = document.getElementById('regAccount').value.trim();
+  const hint = document.getElementById('regAccountHint');
+  if (!acc) {
+    hint.innerHTML = '';
+    hint.className = 'input-hint';
+    return false;
+  }
+  if (!/^[0-9a-zA-Z]{3,20}$/.test(acc)) {
+    hint.innerHTML = '❌ 账号需3-20位字母或数字组合';
+    hint.className = 'input-hint error';
+    return false;
+  }
+  hint.innerHTML = '✅ 账号格式正确';
+  hint.className = 'input-hint success';
+  return true;
+}
+
+function validatePassword() {
+  const pwd = document.getElementById('regPassword').value.trim();
+  const hint = document.getElementById('regPasswordHint');
+  if (!pwd) {
+    hint.innerHTML = '';
+    hint.className = 'input-hint';
+    return false;
+  }
+  if (pwd.length < 3) {
+    hint.innerHTML = '❌ 密码长度至少3位';
+    hint.className = 'input-hint error';
+    return false;
+  }
+  hint.innerHTML = '✅ 密码强度合格';
+  hint.className = 'input-hint success';
+  return true;
+}
+
+function validateConfirmPassword() {
+  const pwd = document.getElementById('regPassword').value.trim();
+  const confirmPwd = document.getElementById('regConfirmPassword').value.trim();
+  const hint = document.getElementById('regConfirmHint');
+  if (!confirmPwd) {
+    hint.innerHTML = '';
+    hint.className = 'input-hint';
+    return false;
+  }
+  if (pwd !== confirmPwd) {
+    hint.innerHTML = '❌ 两次输入的密码不一致';
+    hint.className = 'input-hint error';
+    return false;
+  }
+  hint.innerHTML = '✅ 密码一致';
+  hint.className = 'input-hint success';
+  return true;
+}
+
+function validateEmail() {
+  const email = document.getElementById('regEmail').value.trim();
+  const hint = document.getElementById('regEmailHint');
+  if (!email) {
+    hint.innerHTML = '';
+    hint.className = 'input-hint';
+    return false;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    hint.innerHTML = '❌ 请输入有效的邮箱地址 (例如: player@example.com)';
+    hint.className = 'input-hint error';
+    return false;
+  }
+  hint.innerHTML = '✅ 邮箱格式正确';
+  hint.className = 'input-hint success';
+  return true;
+}
+
+// 注册功能
+function showRegisterPopup() {
+  // 清空表单和提示
+  document.getElementById('regAccount').value = '';
+  document.getElementById('regPassword').value = '';
+  document.getElementById('regConfirmPassword').value = '';
+  document.getElementById('regEmail').value = '';
+  document.getElementById('regAccountHint').innerHTML = '';
+  document.getElementById('regPasswordHint').innerHTML = '';
+  document.getElementById('regConfirmHint').innerHTML = '';
+  document.getElementById('regEmailHint').innerHTML = '';
+  document.getElementById('registerMask').style.display = 'block';
+  document.getElementById('registerPopup').style.display = 'block';
+}
+
+function closeRegisterPopup() {
+  document.getElementById('registerMask').style.display = 'none';
+  document.getElementById('registerPopup').style.display = 'none';
+}
+
+async function handleRegisterWithEmail() {
+  // 实时验证所有字段
+  const isAccountValid = validateAccount();
+  const isPasswordValid = validatePassword();
+  const isConfirmValid = validateConfirmPassword();
+  const isEmailValid = validateEmail();
+  
+  const acc = document.getElementById('regAccount').value.trim();
+  const pwd = document.getElementById('regPassword').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  
+  if (!isAccountValid) {
+    showNotification('账号格式不正确：需3-20位字母或数字', 'warning');
+    document.getElementById('regAccount').focus();
+    return;
+  }
+  if (!isPasswordValid) {
+    showNotification('密码长度至少3位', 'warning');
+    document.getElementById('regPassword').focus();
+    return;
+  }
+  if (!isConfirmValid) {
+    showNotification('两次输入的密码不一致', 'warning');
+    document.getElementById('regConfirmPassword').focus();
+    return;
+  }
+  if (!isEmailValid) {
+    showNotification('请输入有效的邮箱地址', 'warning');
+    document.getElementById('regEmail').focus();
+    return;
+  }
+  
+  let accounts = JSON.parse(localStorage.getItem('paw_accounts') || '{}');
+  if (accounts[acc]) {
+    showNotification('账号已存在，请使用其他账号', 'error');
+    document.getElementById('regAccount').focus();
+    return;
+  }
+  
+  accounts[acc] = btoa(pwd);
+  localStorage.setItem('paw_accounts', JSON.stringify(accounts));
+  
+  emailBindings[acc] = email;
+  localStorage.setItem('paw_email_bindings', JSON.stringify(emailBindings));
+  
+  showNotification('✅ 注册成功！请登录', 'success');
+  closeRegisterPopup();
+}
+
+function showChangePassword() { 
+  if (!currentPlayer) { showNotification('请先登录', 'warning'); return; }
+  document.getElementById('changePasswordMask').style.display = 'block'; 
+  document.getElementById('changePasswordPopup').style.display = 'block'; 
+}
+function closeChangePassword() { 
+  document.getElementById('changePasswordMask').style.display = 'none'; 
+  document.getElementById('changePasswordPopup').style.display = 'none'; 
+}
+async function submitChangePassword() { 
+  if (!currentPlayer) { showNotification('请先登录', 'warning'); return; } 
+  const oldPwd = document.getElementById('oldPassword').value.trim(); 
+  const newPwd = document.getElementById('newPassword').value.trim(); 
+  const confirmPwd = document.getElementById('confirmPassword').value.trim(); 
+  if (!oldPwd || !newPwd || !confirmPwd) { showNotification('请填写完整信息', 'warning'); return; } 
+  if (newPwd.length < 3) { showNotification('新密码至少3位', 'warning'); return; } 
+  if (newPwd !== confirmPwd) { showNotification('两次输入的新密码不一致', 'warning'); return; } 
+  let accounts = JSON.parse(localStorage.getItem('paw_accounts') || '{}'); 
+  if (!accounts[currentPlayer.account]) { showNotification('账号数据异常', 'error'); return; } 
+  if (accounts[currentPlayer.account] !== btoa(oldPwd)) { showNotification('当前密码错误', 'error'); return; } 
+  accounts[currentPlayer.account] = btoa(newPwd); 
+  localStorage.setItem('paw_accounts', JSON.stringify(accounts)); 
+  showNotification('密码修改成功！下次登录请使用新密码', 'success'); 
+  closeChangePassword(); 
+}
+
+function showForgotPassword() { 
+  document.getElementById('forgotPasswordMask').style.display = 'block'; 
+  document.getElementById('forgotPasswordPopup').style.display = 'block'; 
+}
+function closeForgotPassword() { 
+  document.getElementById('forgotPasswordMask').style.display = 'none'; 
+  document.getElementById('forgotPasswordPopup').style.display = 'none'; 
+}
+async function submitResetPassword() { 
+  const acc = document.getElementById('forgotAccount').value.trim(); 
+  const email = document.getElementById('forgotEmail').value.trim();
+  const newPwd = document.getElementById('newPasswordReset').value.trim(); 
+  const confirmPwd = document.getElementById('confirmPasswordReset').value.trim(); 
+  
+  if (!acc || !email) { showNotification('请输入账号和绑定邮箱', 'warning'); return; } 
+  if (!newPwd || !confirmPwd) { showNotification('请填写新密码', 'warning'); return; } 
+  if (newPwd.length < 3) { showNotification('新密码至少3位', 'warning'); return; } 
+  if (newPwd !== confirmPwd) { showNotification('两次输入的密码不一致', 'warning'); return; } 
+  
+  let accounts = JSON.parse(localStorage.getItem('paw_accounts') || '{}'); 
+  if (!accounts[acc]) { showNotification('账号不存在', 'error'); return; }
+  
+  const bindEmail = emailBindings[acc];
+  if (!bindEmail || bindEmail !== email) {
+    showNotification('邮箱验证失败，请使用注册时绑定的邮箱', 'error');
+    return;
+  }
+  
+  accounts[acc] = btoa(newPwd); 
+  localStorage.setItem('paw_accounts', JSON.stringify(accounts)); 
+  showNotification('密码重置成功！请使用新密码登录', 'success'); 
+  closeForgotPassword(); 
+}
+
+function modifyPasswordNotLoggedIn() {
+  if (currentPlayer) {
+    showChangePassword();
+  } else {
+    showNotification('请先登录后再修改密码', 'warning');
+  }
 }
 
 async function handleLogin() { 
@@ -1172,8 +1529,9 @@ async function handleLogin() {
   startInviteListener(); 
   showNotification(`欢迎回来，${currentPlayer.nick}！`, 'success'); 
   if (updateInterval) clearInterval(updateInterval); 
-  // 自动刷新间隔改为5分钟（300000毫秒）
   updateInterval = setInterval(async () => { await silentRefreshUI(); }, AUTO_REFRESH_INTERVAL); 
+  if (rankingInterval) clearInterval(rankingInterval);
+  rankingInterval = setInterval(() => { updateRanking(); }, RANKING_REFRESH_INTERVAL);
 }
 
 function startInviteListener() { 
@@ -1224,195 +1582,9 @@ function handleChangeName() {
   } 
 }
 
-function toggleTeam() { let box = document.getElementById('teamSystem'); box.style.display = box.style.display === 'block' ? 'none' : 'block'; }
-
-// 合并后的搜索功能
-function searchRooms() { 
-  const searchTerm = document.getElementById('searchRoomInput').value.trim(); 
-  const resultsDiv = document.getElementById('searchResults'); 
-  if (!searchTerm) { 
-    resultsDiv.innerHTML = '<div style="padding:20px;text-align:center;color:#888;">输入房间名称或ID进行搜索</div>'; 
-    return; 
-  } 
-  
-  const exactRoom = sharedData.teams[searchTerm];
-  if (exactRoom) {
-    resultsDiv.innerHTML = `
-      <div class="room-item">
-        <div>
-          <span style="font-weight:bold;">🏠 ${exactRoom.roomName}</span>
-          <span style="font-size:12px; color:#888; margin-left:8px;">👥 ${exactRoom.members.length}/${MAX_TEAM_SIZE}</span>
-          <span style="font-size:11px; color:#ffaa44; margin-left:8px;">👑 ${sharedData.characters[exactRoom.owner]?.nick || exactRoom.owner}</span>
-        </div>
-        <button class="btn btn-sm btn-success" onclick="joinRoom('${exactRoom.roomName}')">加入</button>
-      </div>`;
-    return;
-  }
-  
-  const filteredRooms = Object.values(sharedData.teams || {}).filter(room => room.roomName.toLowerCase().includes(searchTerm.toLowerCase())); 
-  if (filteredRooms.length === 0) { 
-    resultsDiv.innerHTML = '<div style="padding:20px;text-align:center;color:#888;">未找到匹配的房间</div>'; 
-    return; 
-  } 
-  resultsDiv.innerHTML = filteredRooms.map(room => `<div class="room-item"><div><span style="font-weight:bold;">🏠 ${room.roomName}</span><span style="font-size:12px; color:#888; margin-left:8px;">👥 ${room.members.length}/${MAX_TEAM_SIZE}</span><span style="font-size:11px; color:#ffaa44; margin-left:8px;">👑 ${sharedData.characters[room.owner]?.nick || room.owner}</span></div><button class="btn btn-sm btn-success" onclick="joinRoom('${room.roomName}')">加入</button></div>`).join(''); 
-}
-
-function clearSearch() { 
-  document.getElementById('searchRoomInput').value = ''; 
-  document.getElementById('searchResults').innerHTML = '<div style="padding:20px;text-align:center;color:#888;">输入房间名称或ID进行搜索</div>'; 
-}
-
-// 注册功能（带邮箱绑定）
-function showRegisterPopup() {
-  document.getElementById('registerMask').style.display = 'block';
-  document.getElementById('registerPopup').style.display = 'block';
-  document.getElementById('regAccount').value = '';
-  document.getElementById('regPassword').value = '';
-  document.getElementById('regConfirmPassword').value = '';
-  document.getElementById('regEmail').value = '';
-}
-
-function closeRegisterPopup() {
-  document.getElementById('registerMask').style.display = 'none';
-  document.getElementById('registerPopup').style.display = 'none';
-}
-
-async function handleRegisterWithEmail() {
-  let acc = document.getElementById('regAccount').value.trim();
-  let pwd = document.getElementById('regPassword').value.trim();
-  let confirmPwd = document.getElementById('regConfirmPassword').value.trim();
-  let email = document.getElementById('regEmail').value.trim();
-  
-  if (!acc || !pwd || !confirmPwd || !email) {
-    showNotification('请填写所有信息', 'warning');
-    return;
-  }
-  if (!/^[0-9a-zA-Z]{3,20}$/.test(acc)) {
-    showNotification('账号需3-20位字母数字', 'warning');
-    return;
-  }
-  if (pwd.length < 3) {
-    showNotification('密码至少3位', 'warning');
-    return;
-  }
-  if (pwd !== confirmPwd) {
-    showNotification('两次输入的密码不一致', 'warning');
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showNotification('请输入有效的邮箱地址', 'warning');
-    return;
-  }
-  
-  let accounts = JSON.parse(localStorage.getItem('paw_accounts') || '{}');
-  if (accounts[acc]) {
-    showNotification('账号已存在', 'error');
-    return;
-  }
-  
-  // 保存账号密码和邮箱绑定
-  accounts[acc] = btoa(pwd);
-  localStorage.setItem('paw_accounts', JSON.stringify(accounts));
-  
-  // 保存邮箱绑定
-  emailBindings[acc] = email;
-  localStorage.setItem('paw_email_bindings', JSON.stringify(emailBindings));
-  
-  showNotification('注册成功！请登录', 'success');
-  closeRegisterPopup();
-}
-
-// 修改密码功能（登录后）
-function showChangePassword() { 
-  if (!currentPlayer) { showNotification('请先登录', 'warning'); return; }
-  document.getElementById('changePasswordMask').style.display = 'block'; 
-  document.getElementById('changePasswordPopup').style.display = 'block'; 
-}
-function closeChangePassword() { 
-  document.getElementById('changePasswordMask').style.display = 'none'; 
-  document.getElementById('changePasswordPopup').style.display = 'none'; 
-  document.getElementById('oldPassword').value = ''; 
-  document.getElementById('newPassword').value = ''; 
-  document.getElementById('confirmPassword').value = ''; 
-}
-async function submitChangePassword() { 
-  if (!currentPlayer) { showNotification('请先登录', 'warning'); return; } 
-  const oldPwd = document.getElementById('oldPassword').value.trim(); 
-  const newPwd = document.getElementById('newPassword').value.trim(); 
-  const confirmPwd = document.getElementById('confirmPassword').value.trim(); 
-  if (!oldPwd || !newPwd || !confirmPwd) { showNotification('请填写完整信息', 'warning'); return; } 
-  if (newPwd.length < 3) { showNotification('新密码至少3位', 'warning'); return; } 
-  if (newPwd !== confirmPwd) { showNotification('两次输入的新密码不一致', 'warning'); return; } 
-  let accounts = JSON.parse(localStorage.getItem('paw_accounts') || '{}'); 
-  if (!accounts[currentPlayer.account]) { showNotification('账号数据异常', 'error'); return; } 
-  if (accounts[currentPlayer.account] !== btoa(oldPwd)) { showNotification('当前密码错误', 'error'); return; } 
-  accounts[currentPlayer.account] = btoa(newPwd); 
-  localStorage.setItem('paw_accounts', JSON.stringify(accounts)); 
-  showNotification('密码修改成功！下次登录请使用新密码', 'success'); 
-  closeChangePassword(); 
-}
-
-// 忘记密码功能（带邮箱验证）
-function showForgotPassword() { 
-  document.getElementById('forgotPasswordMask').style.display = 'block'; 
-  document.getElementById('forgotPasswordPopup').style.display = 'block'; 
-  document.getElementById('forgotAccount').value = '';
-  document.getElementById('forgotEmail').value = '';
-  document.getElementById('newPasswordReset').value = '';
-  document.getElementById('confirmPasswordReset').value = '';
-}
-function closeForgotPassword() { 
-  document.getElementById('forgotPasswordMask').style.display = 'none'; 
-  document.getElementById('forgotPasswordPopup').style.display = 'none'; 
-}
-async function submitResetPassword() { 
-  const acc = document.getElementById('forgotAccount').value.trim(); 
-  const email = document.getElementById('forgotEmail').value.trim();
-  const newPwd = document.getElementById('newPasswordReset').value.trim(); 
-  const confirmPwd = document.getElementById('confirmPasswordReset').value.trim(); 
-  
-  if (!acc || !email) { 
-    showNotification('请输入账号和绑定邮箱', 'warning'); 
-    return; 
-  } 
-  if (!newPwd || !confirmPwd) { 
-    showNotification('请填写新密码', 'warning'); 
-    return; 
-  } 
-  if (newPwd.length < 3) { 
-    showNotification('新密码至少3位', 'warning'); 
-    return; 
-  } 
-  if (newPwd !== confirmPwd) { 
-    showNotification('两次输入的密码不一致', 'warning'); 
-    return; 
-  } 
-  
-  let accounts = JSON.parse(localStorage.getItem('paw_accounts') || '{}'); 
-  if (!accounts[acc]) { 
-    showNotification('账号不存在', 'error'); 
-    return; 
-  }
-  
-  // 验证邮箱
-  const bindEmail = emailBindings[acc];
-  if (!bindEmail || bindEmail !== email) {
-    showNotification('邮箱验证失败，请使用注册时绑定的邮箱', 'error');
-    return;
-  }
-  
-  accounts[acc] = btoa(newPwd); 
-  localStorage.setItem('paw_accounts', JSON.stringify(accounts)); 
-  showNotification('密码重置成功！请使用新密码登录', 'success'); 
-  closeForgotPassword(); 
-}
-
-function modifyPasswordNotLoggedIn() {
-  if (currentPlayer) {
-    showChangePassword();
-  } else {
-    showNotification('请先登录后再修改密码', 'warning');
-  }
+function toggleTeam() { 
+  let box = document.getElementById('teamSystem'); 
+  box.style.display = box.style.display === 'block' ? 'none' : 'block'; 
 }
 
 async function handleCreate() { 
@@ -1437,6 +1609,8 @@ async function handleCreate() {
   showNotification('角色创建成功！', 'success'); 
   if (updateInterval) clearInterval(updateInterval); 
   updateInterval = setInterval(async () => { await silentRefreshUI(); }, AUTO_REFRESH_INTERVAL); 
+  if (rankingInterval) clearInterval(rankingInterval);
+  rankingInterval = setInterval(() => { updateRanking(); }, RANKING_REFRESH_INTERVAL);
 }
 
 async function handleLogout() { 
@@ -1448,6 +1622,7 @@ async function handleLogout() {
       await saveCloudData(); 
     } 
     if (updateInterval) clearInterval(updateInterval); 
+    if (rankingInterval) clearInterval(rankingInterval);
     if (matchTimer) clearInterval(matchTimer); 
     if (inviteChecker) clearInterval(inviteChecker); 
     currentPlayer = null; 
@@ -1502,7 +1677,6 @@ document.getElementById('deleteGameCharacterBtn').onclick = deleteChar;
 document.getElementById('resetSeasonBtn').onclick = resetSeason;
 document.getElementById('setRankBtn').onclick = setRankScore;
 document.getElementById('changeNickBtn').onclick = changeNickname;
-document.getElementById('confirmRoomReadyBtn').onclick = () => showNotification('房间已创建！准备开始游戏', 'success');
 document.getElementById('redWinBtn').onclick = () => handleHostWin('red');
 document.getElementById('blueWinBtn').onclick = () => handleHostWin('blue');
 document.getElementById('changePasswordBtn').onclick = showChangePassword;
@@ -1514,12 +1688,17 @@ document.getElementById('submitResetPwdBtn').onclick = submitResetPassword;
 document.getElementById('cancelResetPwdBtn').onclick = closeForgotPassword;
 document.getElementById('submitRegisterBtn').onclick = handleRegisterWithEmail;
 document.getElementById('cancelRegisterBtn').onclick = closeRegisterPopup;
+// 注册实时验证事件
+document.getElementById('regAccount').addEventListener('input', validateAccount);
+document.getElementById('regPassword').addEventListener('input', () => { validatePassword(); validateConfirmPassword(); });
+document.getElementById('regConfirmPassword').addEventListener('input', validateConfirmPassword);
+document.getElementById('regEmail').addEventListener('input', validateEmail);
 window.joinRoom = joinRoom;
 
+// 管理员面板检测（每5秒）
 setInterval(() => { 
   if (currentPlayer && currentPlayer.account === ADMIN_ACCOUNT) document.getElementById('adminPanel').style.display = 'block'; 
   else if (document.getElementById('adminPanel')) document.getElementById('adminPanel').style.display = 'none'; 
-  updateRanking(); 
 }, 5000);
 
 loadCloudData();
