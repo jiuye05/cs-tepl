@@ -141,7 +141,6 @@ button{
     <h1>CS TEPL 对战平台</h1>
     <p>对峙2专业匹配 | 乌托邦同款系统</p>
   </div>
-
   <div class="box">
     <div class="title">玩家信息</div>
     <div id="bindInfo" style="font-size:13px;margin-bottom:8px;color:#aaa;">未绑定ID</div>
@@ -150,7 +149,6 @@ button{
     <button onclick="joinQueue()">✅ 进入匹配</button>
     <button class="btn-gray" onclick="leaveQueue()">❌ 退出匹配</button>
   </div>
-
   <div class="box">
     <div class="title">匹配队列（满10人开赛）</div>
     <div class="teams">
@@ -166,7 +164,6 @@ button{
     <input id="kickID" placeholder="输入要踢出的玩家ID" style="margin-top:8px">
     <button class="btn-red" onclick="openKickModal()">👮 管理员踢人</button>
   </div>
-
   <div class="box">
     <div class="title">比赛房间</div>
     <div id="roomInfo" class="room">等待匹配中...</div>
@@ -176,20 +173,17 @@ button{
     </div>
     <button onclick="startMatch()">🎮 开始比赛</button>
   </div>
-
   <div class="box">
     <div class="title">比赛结果</div>
     <button onclick="winT()">🔵 潜伏者 T 胜利</button>
     <button onclick="winCT()">🟢 保卫者 CT 胜利</button>
   </div>
-
   <div class="box">
     <div class="title">排行榜</div>
     <div id="rankList"></div>
     <button class="btn-red" onclick="openClearModal()">🧹 清空排行榜（管理）</button>
   </div>
 </div>
-
 <div id="clearModal" class="modal" style="display:none;">
   <div class="modal-box">
     <h3>管理员验证</h3>
@@ -198,7 +192,6 @@ button{
     <button class="btn-gray" onclick="closeClear()">取消</button>
   </div>
 </div>
-
 <div id="kickModal" class="modal" style="display:none;">
   <div class="modal-box">
     <h3>踢人验证</h3>
@@ -207,7 +200,6 @@ button{
     <button class="btn-gray" onclick="closeKick()">取消</button>
   </div>
 </div>
-
 <script>
 const BIN_ID = "69df8c84856a682189386098";
 const API_KEY = "$2a$10$rw.Jgd7xEJmTN7m1ZgmNbusxBIlzr2St/3rR.Es4SvH/0PRGaJOpG";
@@ -247,7 +239,7 @@ async function getData(){
       protest:0, protestUsers:[], timer:null, winner:null
     };
   }catch(e){
-    return {players:[], roomInfo:"等待匹配中...", rank:{},protest:0,protestUsers:[],timer:null,winner:null};
+    return {players:[], roomInfo:"等待匹配中...", rank:{}, protest:0, protestUsers:[], timer:null, winner:null};
   }
 }
 async function saveData(data){
@@ -265,7 +257,6 @@ async function protestTest(){
   d.protestUsers.push(bd.id);
   await saveData(d);
   alert("抗议成功！当前："+d.protest+"/3人");
-
   if(d.protest >=3){
     d.roomInfo = "⚠️ 抗议成功，比赛结果无效！";
     d.winner = null; d.protest = 0; d.protestUsers = [];
@@ -279,7 +270,6 @@ async function win(side){
   let d = await getData();
   if(d.players.length<10) return alert("比赛尚未开始！");
   if(d.winner) return alert("已判胜，请等待抗议结束！");
-
   d.winner = side;
   d.protest = 0;
   d.protestUsers = [];
@@ -287,14 +277,11 @@ async function win(side){
   document.getElementById("protestArea").style.display = "block";
   await saveData(d);
   alert(side+"方胜利已提交，进入抗议倒计时！");
-
   d.timer = setTimeout(async()=>{
     let d2 = await getData();
     if(!d2.winner || d2.protest >=3) return;
-
     if(d2.winner==="T") d2.players.slice(0,5).forEach(p=>d2.rank[p]=(d2.rank[p]||0)+10);
     if(d2.winner==="CT") d2.players.slice(5,10).forEach(p=>d2.rank[p]=(d2.rank[p]||0)+10);
-
     d2.roomInfo = "✅ "+d2.winner+"胜利（已生效）";
     d2.players = []; d2.winner = null; d2.protest = 0; d2.protestUsers = [];
     await saveData(d2);
@@ -302,7 +289,6 @@ async function win(side){
   },10000);
   await saveData(d);
 }
-
 async function winT(){ win("T"); }
 async function winCT(){ win("CT"); }
 
@@ -363,25 +349,25 @@ async function startMatch(){
   alert("比赛开始！房间已生成！");
 }
 
-function openClearModal(){alert("请输入管理员密码！");document.getElementById("clearModal").style.display="flex"}
-function closeClear(){document.getElementById("clearModal").style.display="none"}
+function openClearModal(){ document.getElementById("clearModal").style.display="flex"; }
+function closeClear(){ document.getElementById("clearModal").style.display="none"; }
 async function doClear(){
-  if(document.getElementById("pwd1").value!==PASSWORD) return alert("密码错误！");
-  let d=await getData(); d.rank={}; await saveData(d);
+  if(document.getElementById("pwd1").value !== PASSWORD) return alert("密码错误！");
+  let d = await getData(); d.rank = {}; await saveData(d);
   alert("排行榜已清空！"); closeClear();
 }
 
-function openKickModal(){alert("请输入管理员密码！");document.getElementById("kickModal").style.display="flex"}
-function closeKick(){document.getElementById("kickModal").style.display="none"}
+function openKickModal(){ document.getElementById("kickModal").style.display="flex"; }
+function closeKick(){ document.getElementById("kickModal").style.display="none"; }
 async function doKick(){
-  let kid=document.getElementById("kickID").value.trim();
-  if(document.getElementById("pwd2").value!==PASSWORD) return alert("密码错误！");
+  let kid = document.getElementById("kickID").value.trim();
+  if(document.getElementById("pwd2").value !== PASSWORD) return alert("密码错误！");
   if(!kid) return alert("请输入要踢的玩家ID！");
-  let d=await getData(); d.players=d.players.filter(x=>x!==kid);
+  let d = await getData(); d.players = d.players.filter(x=>x!==kid);
   await saveData(d); alert("已踢出该玩家！"); closeKick();
 }
 
-setInterval(render,2000);
+setInterval(render, 2000);
 render();
 </script>
 </body>
