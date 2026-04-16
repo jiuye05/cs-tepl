@@ -31,13 +31,76 @@ body{background:#0b0c10;color:#e0e0e0;padding:12px;}
 }
 @keyframes slideDown{from{opacity:0;transform:translate(-50%,-20px);}to{opacity:1;transform:translate(-50%,0);}}
 
-/* 聊天区域 */
+/* 聊天区域 - 可折叠 */
+.chat-wrapper{
+  background:#14161f;
+  border:1px solid #2a2e3e;
+  border-radius:16px;
+  margin-bottom:12px;
+  overflow:hidden;
+  transition: all 0.2s ease;
+}
+.chat-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 14px;
+  background:#14161f;
+  cursor:pointer;
+  user-select:none;
+  border-bottom:1px solid #2a2e3e;
+}
+.chat-header .title{
+  font-size:14px;
+  font-weight:bold;
+  color:#f0f0f0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.chat-header .title::before{
+  content:"";
+  width:3px;
+  height:15px;
+  background:#00ccff;
+  border-radius:4px;
+}
+.chat-header .toggle-icon{
+  font-size:18px;
+  color:#88aacc;
+  transition:transform 0.2s;
+}
+.chat-body{
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+.chat-body.collapsed{
+  display: none;
+}
 .chat-area{
-  max-height:150px;overflow-y:auto;
-  background:#13151e;border-radius:12px;
-  padding:8px;margin-bottom:8px;
+  max-height:150px;
+  overflow-y:auto;
+  background:#13151e;
+  padding:8px;
   font-size:12px;
-  border:1px solid #2a2d3a;
+  border-bottom:1px solid #2a2d3a;
+}
+.chat-input-area{
+  display:flex;
+  gap:6px;
+  padding:10px;
+  background:#0f1119;
+}
+.chat-input-area input{
+  flex:1;
+  margin:0;
+  padding:8px 10px;
+  background:#1e212c;
+}
+.chat-input-area button{
+  width:65px;
+  margin:0;
+  padding:8px 0;
 }
 .chat-msg{margin-bottom:5px;word-break:break-word;line-height:1.4;}
 .chat-system{color:#ffaa44;}
@@ -59,10 +122,12 @@ body{background:#0b0c10;color:#e0e0e0;padding:12px;}
   font-weight:bold;
   letter-spacing:1px;
 }
-.top-bar p{
-  font-size:11px;
-  color:#8899aa;
-  margin-top:4px;
+.top-bar .subnote{
+  font-size:10px;
+  color:#88aacc;
+  margin-top:6px;
+  letter-spacing:0.5px;
+  opacity:0.8;
 }
 .box{
   background:#14161f;
@@ -207,7 +272,7 @@ button:active{transform:scale(0.98);}
 <div class="container">
   <div class="top-bar">
     <h1>⚡ CS TEPL 对战平台</h1>
-    <p>对峙2专业匹配 | 房主制踢人 | 乌托邦同款</p>
+    <div class="subnote">⚡ 点击按钮可能有50ms延迟，请耐心等待同步</div>
   </div>
 
   <div class="box">
@@ -219,15 +284,20 @@ button:active{transform:scale(0.98);}
     <button class="btn-gray" onclick="leaveQueue()">❌ 退出匹配</button>
   </div>
 
-  <!-- 聊天区域 -->
-  <div class="box">
-    <div class="title">💬 房间消息</div>
-    <div id="chatArea" class="chat-area">
-      <div class="chat-msg chat-system">🎮 欢迎来到 TEPL 专业对战平台</div>
+  <!-- 可折叠聊天区域 -->
+  <div class="chat-wrapper" id="chatWrapper">
+    <div class="chat-header" id="chatHeader">
+      <div class="title">💬 房间消息</div>
+      <div class="toggle-icon" id="toggleIcon">▲</div>
     </div>
-    <div style="display:flex;gap:6px;">
-      <input id="chatInput" placeholder="输入消息..." style="flex:1;margin:0;">
-      <button onclick="sendChat()" style="width:65px;margin:0;">发送</button>
+    <div class="chat-body" id="chatBody">
+      <div id="chatArea" class="chat-area">
+        <div class="chat-msg chat-system">🎮 欢迎来到 TEPL 专业对战平台</div>
+      </div>
+      <div class="chat-input-area">
+        <input id="chatInput" placeholder="输入消息...">
+        <button onclick="sendChat()">发送</button>
+      </div>
     </div>
   </div>
 
@@ -294,7 +364,7 @@ button:active{transform:scale(0.98);}
 // ========== 配置 ==========
 const BIN_ID = "69df8c84856a682189386098";
 const API_KEY = "$2a$10$rw.Jgd7xEJmTN7m1ZgmNbusxBIlzr2St/3rR.Es4SvH/0PRGaJOpG";
-const ADMIN_PASSWORD = "123456";   // 仅用于清空排行榜等管理操作，踢人不再使用此密码
+const ADMIN_PASSWORD = "123456";   // 仅用于清空排行榜等管理操作
 const MAP_POOL = ["Dust2","Inferno","Mirage","Nuke","Train","Cache","Overpass","Vertigo","Ancient","Office"];
 const headers = { "X-Access-Key": API_KEY, "Content-Type": "application/json" };
 
@@ -304,6 +374,7 @@ let myUuid = "";
 let lastPlayers = [];
 let lastChatCount = 0;
 let isOnline = true;
+let chatCollapsed = false;  // 聊天折叠状态
 
 // ========== UUID 初始化 ==========
 function initUuid(){
@@ -337,6 +408,38 @@ function updateConnStatus(online){
   }else{
     el.className = "conn-status offline";
     el.title = "断开重连中...";
+  }
+}
+
+// ========== 折叠聊天功能 ==========
+function toggleChat(){
+  const chatBody = document.getElementById("chatBody");
+  const toggleIcon = document.getElementById("toggleIcon");
+  chatCollapsed = !chatCollapsed;
+  if(chatCollapsed){
+    chatBody.classList.add("collapsed");
+    toggleIcon.innerHTML = "▼";
+    localStorage.setItem("chat_collapsed", "true");
+  } else {
+    chatBody.classList.remove("collapsed");
+    toggleIcon.innerHTML = "▲";
+    localStorage.setItem("chat_collapsed", "false");
+  }
+}
+
+// 恢复折叠状态
+function restoreChatState(){
+  const saved = localStorage.getItem("chat_collapsed");
+  if(saved === "true"){
+    chatCollapsed = true;
+    document.getElementById("chatBody")?.classList.add("collapsed");
+    const toggleIcon = document.getElementById("toggleIcon");
+    if(toggleIcon) toggleIcon.innerHTML = "▼";
+  } else {
+    chatCollapsed = false;
+    document.getElementById("chatBody")?.classList.remove("collapsed");
+    const toggleIcon = document.getElementById("toggleIcon");
+    if(toggleIcon) toggleIcon.innerHTML = "▲";
   }
 }
 
@@ -468,38 +571,30 @@ async function sendChat(){
 }
 
 // ========== 房主逻辑 & 踢人改造 ==========
-// 核心改造: 踢人不再使用全局管理员密码，仅当当前玩家是房主时允许踢出
 async function kickPlayerById(targetId){
   let bd = getBindData();
   if(!bd.id) return {success: false, msg: "未绑定ID"};
   
   let d = await getData();
-  // 检查当前用户是否是房主
   if(d.roomOwner !== bd.id){
     return {success: false, msg: "只有房主可以踢出玩家！"};
   }
   if(!targetId || targetId === "") return {success: false, msg: "请输入玩家ID"};
   if(targetId === bd.id) return {success: false, msg: "不能踢出自己"};
   
-  // 检查目标是否在队列中
   if(!d.players.includes(targetId)){
     return {success: false, msg: "该玩家不在匹配队列中"};
   }
   
-  // 记录被踢玩家（本局禁止重进）
   if(!d.kickedPlayers) d.kickedPlayers = [];
   if(!d.kickedPlayers.includes(targetId)) d.kickedPlayers.push(targetId);
   
-  // 从队列移除
   d.players = d.players.filter(p => p !== targetId);
   
-  // 重要: 如果被踢的是房主，需要转移房主
   let wasOwner = (d.roomOwner === targetId);
   if(wasOwner){
-    // 房主被踢了，将房主转移给队列中第一个人（如果有）
     if(d.players.length > 0){
       d.roomOwner = d.players[0];
-      // 更新对应的ownerUuid
       for(let [uuid, id] of Object.entries(d.playerBindings || {})){
         if(id === d.players[0]){
           d.ownerUuid = uuid;
@@ -519,7 +614,6 @@ async function kickPlayerById(targetId){
   return {success: true, msg: "踢出成功"};
 }
 
-// UI 踢人按钮处理 (房主操作)
 async function handleKick(){
   let inputEl = document.getElementById("kickPlayerInput");
   let targetId = inputEl.value.trim();
@@ -532,7 +626,6 @@ async function handleKick(){
   }
 }
 
-// 更新房主UI面板 (根据当前玩家是否是房主，显示/隐藏踢人控件)
 function updateKickPanelVisibility(currentRoomOwner){
   let bd = getBindData();
   let isOwner = (bd.id && bd.id === currentRoomOwner);
@@ -547,18 +640,15 @@ function updateKickPanelVisibility(currentRoomOwner){
   }
 }
 
-// 自动更新房主(当队列变化时重新指派)
-async function updateRoomOwner(players){
+async function leaveQueue(){
+  let bd = getBindData();
+  if(!bd.id) return alert("请先绑定游戏ID！");
   let d = await getData();
-  if(players.length === 0){
-    d.roomOwner = null;
-    d.ownerUuid = null;
-    await saveData(d);
-    return;
-  }
-  // 无房主或房主不在队列中 => 重新分配
-  if(!d.roomOwner || (d.roomOwner && !players.includes(d.roomOwner))){
-    let newOwner = players[0];
+  let wasOwner = (d.roomOwner === bd.id);
+  d.players = d.players.filter(x => x !== bd.id);
+  
+  if(wasOwner && d.players.length > 0){
+    let newOwner = d.players[0];
     d.roomOwner = newOwner;
     for(let [uuid, id] of Object.entries(d.playerBindings || {})){
       if(id === newOwner){
@@ -566,14 +656,74 @@ async function updateRoomOwner(players){
         break;
       }
     }
-    await saveData(d);
-    addSystemMsg(`👑 房主变更为 ${newOwner}`);
+    addSystemMsg(`👑 房主 ${bd.id} 退出匹配，房主移交给 ${newOwner}`);
+    showToast(`你已退出匹配，房主移交给 ${newOwner}`, true);
+  } else if(wasOwner && d.players.length === 0){
+    d.roomOwner = null;
+    d.ownerUuid = null;
+    addSystemMsg(`👑 房主 ${bd.id} 退出匹配，暂无其他玩家`);
+    showToast("你已退出匹配，房间无房主", true);
+  } else {
+    addSystemMsg(`➖ ${bd.id} 离开队列 (${d.players.length}/10)`);
+    showToast("退出匹配成功", true);
   }
+  await saveData(d);
+  await render();
+}
+
+async function joinQueue(){
+  let bd = getBindData();
+  if(!bd.id) return alert("请先绑定游戏ID！");
+  let d = await getData();
+  if(d.kickedPlayers && d.kickedPlayers.includes(bd.id)){
+    return alert("你已被踢出，请等待下一局比赛！");
+  }
+  if(d.players.includes(bd.id)) return alert("已在匹配队列中！");
+  if(d.players.length >= 10) return alert("队列已满，请等待下一局！");
+  if(!d.playerBindings) d.playerBindings = {};
+  d.playerBindings[myUuid] = bd.id;
+  d.players.push(bd.id);
+  
+  if(!d.roomOwner){
+    d.roomOwner = bd.id;
+    d.ownerUuid = myUuid;
+    addSystemMsg(`👑 ${bd.id} 成为房主`);
+  } else {
+    if(!d.players.includes(d.roomOwner)){
+      let newOwner = d.players[0];
+      d.roomOwner = newOwner;
+      for(let [uuid, id] of Object.entries(d.playerBindings || {})){
+        if(id === newOwner){
+          d.ownerUuid = uuid;
+          break;
+        }
+      }
+      addSystemMsg(`👑 房主修复为 ${d.roomOwner}`);
+    }
+  }
+  await saveData(d);
+  addSystemMsg(`➕ ${bd.id} 加入队列 (${d.players.length}/10)`);
+  showToast("进入匹配成功");
 }
 
 function isRoomOwner(){
   let bd = getBindData();
   return bd.id && bd.id === window.currentRoomOwner;
+}
+
+async function startMatch(){
+  let bd = getBindData();
+  let d = await getData();
+  if(!isRoomOwner()) return alert("只有房主可以开始比赛！");
+  if(d.players.length < 10) return alert("需要10名玩家才能开始比赛！");
+  let map = MAP_POOL[Math.floor(Math.random()*MAP_POOL.length)];
+  let room = "TEPL-"+Math.floor(1000+Math.random()*9000);
+  let pwd = Math.floor(100000+Math.random()*900000);
+  d.roomInfo = `<strong>🏠 房间：${room}</strong><br>🔑 密码：${pwd}<br>🗺️ 地图：${map}<br>⚡ 5v5 竞技模式`;
+  d.kickedPlayers = [];
+  await saveData(d);
+  addSystemMsg(`🎮 房主开始了比赛！地图: ${map}`);
+  showToast("比赛开始！房间已生成");
 }
 
 // ========== 抗议逻辑 ==========
@@ -628,7 +778,7 @@ async function win(side){
     d2.protestUsers = [];
     d2.roomOwner = null;
     d2.ownerUuid = null;
-    d2.kickedPlayers = [];   // 新对局清空踢人列表
+    d2.kickedPlayers = [];
     await saveData(d2);
     addSystemMsg(`🎉 最终胜者: ${d2.winner === 'T'? 'T方' : 'CT方'}，积分已更新`);
   }, 10000);
@@ -637,61 +787,7 @@ async function win(side){
 async function winT(){ win("T"); }
 async function winCT(){ win("CT"); }
 
-// ========== 队列操作 ==========
-async function joinQueue(){
-  let bd = getBindData();
-  if(!bd.id) return alert("请先绑定游戏ID！");
-  let d = await getData();
-  if(d.kickedPlayers && d.kickedPlayers.includes(bd.id)){
-    return alert("你已被踢出，请等待下一局比赛！");
-  }
-  if(d.players.includes(bd.id)) return alert("已在匹配队列中！");
-  if(d.players.length >= 10) return alert("队列已满，请等待下一局！");
-  if(!d.playerBindings) d.playerBindings = {};
-  d.playerBindings[myUuid] = bd.id;
-  d.players.push(bd.id);
-  // 更新房主
-  if(!d.roomOwner){
-    d.roomOwner = bd.id;
-    d.ownerUuid = myUuid;
-  } else {
-    await updateRoomOwner(d.players);
-  }
-  await saveData(d);
-  addSystemMsg(`➕ ${bd.id} 加入队列 (${d.players.length}/10)`);
-  showToast("进入匹配成功");
-}
-
-async function leaveQueue(){
-  let bd = getBindData();
-  if(!bd.id) return alert("请先绑定游戏ID！");
-  let d = await getData();
-  let wasOwner = (d.roomOwner === bd.id);
-  d.players = d.players.filter(x=>x!==bd.id);
-  if(wasOwner){
-    await updateRoomOwner(d.players);
-  }
-  await saveData(d);
-  addSystemMsg(`➖ ${bd.id} 离开队列 (${d.players.length}/10)`);
-  showToast("退出匹配");
-}
-
-async function startMatch(){
-  let bd = getBindData();
-  let d = await getData();
-  if(!isRoomOwner()) return alert("只有房主可以开始比赛！");
-  if(d.players.length < 10) return alert("需要10名玩家才能开始比赛！");
-  let map = MAP_POOL[Math.floor(Math.random()*MAP_POOL.length)];
-  let room = "TEPL-"+Math.floor(1000+Math.random()*9000);
-  let pwd = Math.floor(100000+Math.random()*900000);
-  d.roomInfo = `<strong>🏠 房间：${room}</strong><br>🔑 密码：${pwd}<br>🗺️ 地图：${map}<br>⚡ 5v5 竞技模式`;
-  d.kickedPlayers = [];   // 新比赛重置踢人列表
-  await saveData(d);
-  addSystemMsg(`🎮 房主开始了比赛！地图: ${map}`);
-  showToast("比赛开始！房间已生成");
-}
-
-// ========== 管理员清空排行（保留原功能）==========
+// ========== 管理员清空排行 ==========
 function openClearModal(){ document.getElementById("clearModal").style.display="flex"; }
 function closeClear(){ document.getElementById("clearModal").style.display="none"; }
 async function doClear(){
@@ -731,13 +827,10 @@ async function render(){
     ownerInfo.innerHTML = '🏠 暂无房主，加入队列自动成为房主';
   }
   
-  // 更新踢人面板可见性
   updateKickPanelVisibility(d.roomOwner);
-  
   checkIfKicked(d.players);
   lastPlayers = [...d.players];
   
-  // 聊天增量
   if(d.chatMessages && d.chatMessages.length > lastChatCount){
     for(let i = lastChatCount; i < d.chatMessages.length; i++){
       let msg = d.chatMessages[i];
@@ -781,17 +874,22 @@ async function renderRank(d){
   if(Object.keys(d.rank).length===0) r.innerHTML = "<div style='text-align:center;padding:8px;color:#666'>暂无数据</div>";
 }
 
-// ========== 定时刷新 & 绑定踢人按钮事件 ==========
+// ========== 定时刷新 & 绑定事件 ==========
 setInterval(async ()=>{ await render(); }, 1800);
 setInterval(async ()=>{ try{ await getData(); }catch(e){ updateConnStatus(false); } }, 25000);
 
-// 为踢人按钮绑定事件 (动态绑定确保可用)
 document.addEventListener("DOMContentLoaded", ()=>{
   const kickBtn = document.getElementById("kickConfirmBtn");
   if(kickBtn) kickBtn.addEventListener("click", handleKick);
+  
+  // 聊天折叠功能
+  const chatHeader = document.getElementById("chatHeader");
+  if(chatHeader) chatHeader.addEventListener("click", toggleChat);
+  restoreChatState();
+  
   initUuid();
   render();
-  addSystemMsg("🟢 已连接服务器 | 房主可使用踢人功能");
+  addSystemMsg("🟢 已连接服务器 | 房主可使用踢人功能，消息栏可点击标题隐藏 | 点击按钮有50ms左右延迟");
 });
 </script>
 </body>
